@@ -1,7 +1,7 @@
 devices:
   - name: Galaxy S9
     os: Android
-    udid: fghfdgh546456
+    udid: 1c8babc8ce0d7ece
     hub_serial: 11212
     hub_port: 1
   - name: iPhone XS Max
