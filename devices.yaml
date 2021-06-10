@@ -1,0 +1,21 @@
+devices:
+  - name: Galaxy S9
+    os: Android
+    udid: 1c8babc8ce0d7ece
+    hub_serial: 11212
+    hub_port: 1
+  - name: iPhone XS Max
+    os: iOS
+    udid: 457456456-2342342
+    hub_serial: 11212
+    hub_port: 2
+  - name: Huawei P9
+    os: Android
+    udid: sdfhdfgh324dxb
+    hub_serial: 11212
+    hub_port: 3
+  - name: iPhone XR
+    os: iOS
+    udid: 0234234-324342
+    hub_serial: 11212
+    hub_port: 4
