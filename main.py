@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from utils import generate_devices
+from devices import Devices
 
 app = Flask(__name__)
 
@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route('/api/status')
 def status():
     requested_udid = request.args.get('device')
-    devices = generate_devices()
+    devices = Devices()
     for device in devices:
         if device.udid == requested_udid:
             device.update_battery_percentage()
