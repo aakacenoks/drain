@@ -9,17 +9,11 @@ def status():
     requested_udid = request.args.get('device')
     devices = Devices()
     if requested_udid is None:
-        response = jsonify(devices.to_dict())
-        response.status_code = 200
-        return response
+        return jsonify(devices.to_dict()), 200
     else:
         if devices.contains(requested_udid):
-            response = jsonify(devices.get(requested_udid).to_dict())
-            response.status_code = 200
-            return response
-    resp = jsonify({'error': f'Device with udid {requested_udid} not connected.'})
-    resp.status_code = 404
-    return resp
+            return devices.get(requested_udid).to_dict(), 200
+    return {'error': f'Device with udid {requested_udid} not connected.'}, 404
 
 
 if __name__ == '__main__':
