@@ -8,12 +8,15 @@ app = Flask(__name__)
 def status():
     requested_udid = request.args.get('device')
     devices = Devices()
-    for device in devices:
-        if device.udid == requested_udid:
-            device.update_battery_percentage()
-            resp = jsonify(device.to_dict())
-            resp.status_code = 200
-            return resp
+    if requested_udid is None:
+        response = jsonify(devices.to_dict())
+        response.status_code = 200
+        return response
+    else:
+        if devices.contains(requested_udid):
+            response = jsonify(devices.get(requested_udid).to_dict())
+            response.status_code = 200
+            return response
     resp = jsonify({'error': f'Device with udid {requested_udid} not connected.'})
     resp.status_code = 404
     return resp

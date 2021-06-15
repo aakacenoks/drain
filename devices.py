@@ -13,3 +13,21 @@ class Devices:
             new_device = Device(device_params)
             generated_devices.append(new_device)
         return generated_devices
+    
+    def to_dict(self):
+        devices_dict = []
+        for device in self.device_list:
+            devices_dict.append(device.to_dict())
+        return devices_dict
+
+    def contains(self, udid):
+        for device in self.device_list:
+            if device.udid == udid:
+                return True
+        return False
+
+    def get(self, udid):
+        for device in self.device_list:
+            if device.udid == udid:
+                return device
+        return None

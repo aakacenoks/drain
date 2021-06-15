@@ -9,11 +9,13 @@ class Device:
         self.hub_serial = device_params['hub_serial']
         self.hub_port = device_params['hub_port']
         self.connected = False
-        self.battery_percentage = None
+        self.battery_percentage = -1
 
     # def update_connection(self):
+        # Do this after X amount of time forever
 
     def update_battery_percentage(self):
+        # Do this after X amount of time forever
         if self.os.lower() == 'android':
             charge = shell(f"adb -s {self.udid} shell dumpsys battery | grep level | sed -n -e 's/^.*level: //p'")
         elif self.os.lower() == 'ios':
