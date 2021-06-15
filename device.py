@@ -1,4 +1,4 @@
-from utils import shell
+from utils import shell, adb_devices
 
 
 class Device:
@@ -11,20 +11,32 @@ class Device:
         self.connected = False
         self.battery_percentage = -1
 
-    # def update_connection(self):
-        # Do this after X amount of time forever
+    def update_connection(self):
+        if self.os.lower() == 'android':
+            if self.udid in adb_devices():
+                self.connected = True
+                return
+        # elif self.os.lower() == 'ios':
+        #     charge = shell(f'idevice_id --list | grep {self.udid}')
+        # else:
+        #     raise Exception(f'Unknown device OS ({self.os})')
+        # self.connected = int(charge)
 
     def update_battery_percentage(self):
         # Do this after X amount of time forever
+        # Safely catch connection errors
         if self.os.lower() == 'android':
             charge = shell(f"adb -s {self.udid} shell dumpsys battery | grep level | sed -n -e 's/^.*level: //p'")
         elif self.os.lower() == 'ios':
             charge = shell(f'ideviceinfo -u {self.udid} -q com.apple.mobile.battery -k BatteryCurrentCapacity')
         else:
             raise Exception(f'Unknown device OS ({self.os})')
+        print(self.udid)
+
         self.battery_percentage = int(charge)
 
     def to_dict(self):
+        self.update_connection()
         return {
             'name': self.name,
             'os': self.os,
