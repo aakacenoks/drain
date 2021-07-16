@@ -1,0 +1,73 @@
+import json
+
+from config.device.android_device import AndroidDevice
+from config.device.ios_device import IOSDevice
+from utils import read_devices, get_connected_ios_devices, get_connected_android_devices
+import threading
+import time
+from logger import log
+
+
+class Devices:
+    def __init__(self):
+        self.device_list = self.generate_devices()
+        self.auto_update = False
+
+    def generate_devices(self):
+        generated_devices = []
+        device_list = read_devices()
+        for device_params in device_list['devices']:
+            if device_params['os'].lower() == "android":
+                generated_devices.append(AndroidDevice(device_params))
+            else:
+                generated_devices.append(IOSDevice(device_params))
+        return generated_devices
+
+    def to_dict(self):
+        devices_dict = []
+        for device in self.device_list:
+            devices_dict.append(device.to_dict())
+        return devices_dict
+
+    def to_string(self):
+        return json.dumps(self.to_dict(), indent=2, sort_keys=True)
+
+    def contains(self, udid):
+        for device in self.device_list:
+            if device.udid == udid:
+                return True
+        return False
+
+    def get(self, udid):
+        for device in self.device_list:
+            if device.udid == udid:
+                return device
+        return None
+
+    def update_connection(self):
+        while True:
+            log.info("conection update")
+            android_devices = get_connected_android_devices()
+            ios_devices = get_connected_ios_devices()
+            for device in self.device_list:
+                if type(device) is AndroidDevice:
+                    device.connected = device.udid in android_devices
+                else:
+                    device.connected = device.udid in ios_devices
+            time.sleep(5)
+
+    def update_battery_percentage(self):
+        while True:
+            log.info("battery update")
+            log.info(self.to_string())
+            for device in self.device_list:
+                device.update_battery_percentage()
+            time.sleep(10)
+
+    def update(self):
+        connection_updates = threading.Thread(name='connection', target=self.update_connection)
+        connection_updates.setDaemon(True)
+        connection_updates.start()
+        battery_updates = threading.Thread(name='battery', target=self.update_battery_percentage)
+        battery_updates.setDaemon(True)
+        battery_updates.start()
