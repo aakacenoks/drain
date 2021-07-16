@@ -7,10 +7,9 @@ def shell(command):
     return byte_output.decode('UTF-8').rstrip()
 
 
-def get_connected_android_devices():
-    output = shell('adb devices')
+def get_connected_devices(shell_output):
     connected_devices = []
-    lines = output.split('\n')[1:]
+    lines = shell_output.split('\n')[1:]
     for line in lines:
         el = line.split()
         if len(el) > 0:
@@ -19,16 +18,14 @@ def get_connected_android_devices():
     return connected_devices
 
 
+def get_connected_android_devices():
+    output = shell('adb devices')
+    return get_connected_devices(output)
+
+
 def get_connected_ios_devices():
     output = shell('idevice_id --list')
-    connected_devices = []
-    lines = output.split('\n')
-    for line in lines:
-        el = line.split()
-        if len(el) > 0:
-            udid = line.split()[0]
-            connected_devices.append(udid)
-    return connected_devices
+    return get_connected_devices(output)
 
 
 def read_devices():
