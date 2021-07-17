@@ -6,12 +6,8 @@ from logger import log
 app = Flask(__name__)
 
 devices = Devices()
-
-print(devices.to_dict())
-devices.auto_update = True
+print(devices.to_string())
 devices.update()
-
-log.debug("test log")
 
 
 @app.route('/api/status')
@@ -23,6 +19,18 @@ def status():
         if devices.contains(requested_udid):
             return devices.get(requested_udid).to_dict(), 200
     return {'error': f'Device with udid {requested_udid} not connected.'}, 404
+
+
+@app.route('/api/noupdate')
+def no_update():
+    devices.auto_update = False
+    return {'message': 'Automatic update disabled'}, 200
+
+
+@app.route('/api/update')
+def update():
+    devices.auto_update = True
+    return {'message': 'Automatic update enabled'}, 200
 
 
 if __name__ == '__main__':
