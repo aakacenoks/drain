@@ -11,6 +11,15 @@ class Device:
         self.connected = False
         self.battery_percentage = None
 
+    def update_charge_status(self):
+        pass
+
+    def disconnect(self):
+        pass
+
+    def connect(self):
+        pass
+
     def to_dict(self):
         return {
             'name': self.name,

@@ -21,6 +21,18 @@ def status():
     return {'error': f'Device with udid {requested_udid} not connected.'}, 404
 
 
+@app.route('/api/cycle')
+def cycle():
+    devices.cycle_mode = True
+    return {'message': 'Automatic update disabled'}, 200
+
+
+@app.route('/api/connect')
+def cycle():
+    devices.cycle_mode = False
+    return {'message': 'Automatic update disabled'}, 200
+
+
 @app.route('/api/noupdate')
 def no_update():
     devices.auto_update = False
