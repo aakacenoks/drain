@@ -34,7 +34,7 @@ class Devices:
             enable_all_ports(hub)
 
     def to_dict(self):
-        return [d.to_dict() for d in self.device_list]
+        return [device.to_dict() for device in self.device_list]
 
     def to_string(self):
         return json.dumps(self.to_dict(), indent=2, sort_keys=True)
