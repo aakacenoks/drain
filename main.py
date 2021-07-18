@@ -23,13 +23,13 @@ def status():
 @app.route('/api/cycle')
 def cycle():
     devices.cycle_mode = True
-    return {'message': 'Automatic update disabled'}, 200
+    return {'message': 'Cycle mode enabled'}, 200
 
 
 @app.route('/api/connect')
 def connect():
     devices.cycle_mode = False
-    return {'message': 'Automatic update disabled'}, 200
+    return {'message': 'Cycle mode disabled. All ports connected.'}, 200
 
 
 @app.route('/api/noupdate')
