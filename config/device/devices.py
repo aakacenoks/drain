@@ -1,11 +1,11 @@
 import json
-
+import time
 from config.device.android_device import AndroidDevice
 from config.device.ios_device import IOSDevice
 from utils import read_devices, get_connected_ios_devices, get_connected_android_devices
 from threading import Thread
-import time
 from logger import log
+from acroname_manager import enable_all_ports, disable_all_ports
 
 
 class Devices:
@@ -13,6 +13,7 @@ class Devices:
         self.device_list = self.generate_devices()
         self.auto_update = True
         self.cycle_mode = True
+        self.hubs = set([device.hub_serial for device in self.device_list])
 
     def generate_devices(self):
         generated_devices = []
@@ -23,6 +24,14 @@ class Devices:
             else:
                 generated_devices.append(IOSDevice(device_params))
         return generated_devices
+
+    def disconnect(self):
+        for hub in self.hubs:
+            disable_all_ports(hub)
+
+    def connect(self):
+        for hub in self.hubs:
+            enable_all_ports(hub)
 
     def to_dict(self):
         devices_dict = []

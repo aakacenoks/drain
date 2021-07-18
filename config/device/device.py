@@ -1,4 +1,5 @@
 import json
+from acroname_manager import enable_port, disable_port
 
 
 class Device:
@@ -12,13 +13,16 @@ class Device:
         self.battery_percentage = None
 
     def update_charge_status(self):
-        pass
+        if self.battery_percentage >= 80:
+            self.disconnect()
+        elif self.battery_percentage <= 25:
+            self.connect()
 
     def disconnect(self):
-        pass
+        disable_port(self.hub_serial, self.hub_port)
 
     def connect(self):
-        pass
+        enable_port(self.hub_serial, self.hub_port)
 
     def to_dict(self):
         return {
@@ -33,3 +37,6 @@ class Device:
 
     def to_string(self):
         return json.dumps(self.to_dict(), indent=2, sort_keys=True)
+
+    def update_battery_percentage(self):
+        pass

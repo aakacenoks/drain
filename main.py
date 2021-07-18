@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify
-
 from config.device.devices import Devices
 from logger import log
 
@@ -28,7 +27,7 @@ def cycle():
 
 
 @app.route('/api/connect')
-def cycle():
+def connect():
     devices.cycle_mode = False
     return {'message': 'Automatic update disabled'}, 200
 

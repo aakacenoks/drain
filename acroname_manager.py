@@ -1,6 +1,5 @@
 import brainstem
 from brainstem.result import Result
-
 from logger import log
 
 
