@@ -33,11 +33,3 @@ def read_devices():
             return yaml.safe_load(stream)
         except yaml.YAMLError as exc:
             raise Exception(f'Could not read config file: {exc}')
-
-
-def represents_int(s):
-    try:
-        int(s)
-        return True
-    except ValueError:
-        return False

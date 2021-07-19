@@ -1,5 +1,9 @@
 import json
 from acroname_manager import enable_port, disable_port
+from logger import log
+
+MAX_BATTERY = 80
+MIN_BATTERY = 30
 
 
 class Device:
@@ -11,12 +15,25 @@ class Device:
         self.hub_port = device_params['hub_port']
         self.connected = False
         self.battery_percentage = None
+        self.charging = False
 
     def update_charge_status(self):
-        if self.battery_percentage >= 80:
+        self.connect()
+        self.update_battery_percentage()
+        if self.battery_percentage >= MAX_BATTERY and self.charging:
+            log.info(f"{self.name} is charged enough ({self.battery_percentage}/{MAX_BATTERY}). turning off charging.")
+            self.charging = False
             self.disconnect()
-        elif self.battery_percentage <= 25:
+        elif self.battery_percentage <= MIN_BATTERY and not self.charging:
+            log.info(f"{self.name} is drained enough ({self.battery_percentage}/{MIN_BATTERY}). turning on charging.")
+            self.charging = True
             self.connect()
+        elif (self.battery_percentage < MIN_BATTERY and self.battery_percentage < MAX_BATTERY) and self.charging:
+            log.info(f"{self.name} is charged ({self.battery_percentage}/{MAX_BATTERY}). continuing the charge.")
+            return
+        elif self.battery_percentage > MIN_BATTERY and not self.charging:
+            log.info(f"{self.name} is drained ({self.battery_percentage}/{MIN_BATTERY}). continuing the drain.")
+            self.disconnect()
 
     def disconnect(self):
         disable_port(self.hub_serial, self.hub_port)

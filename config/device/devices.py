@@ -54,7 +54,6 @@ class Devices:
     def update_connection(self):
         while True:
             if self.auto_update:
-                log.info("conection update")
                 android_devices = get_connected_android_devices()
                 ios_devices = get_connected_ios_devices()
                 for device in self.device_list:
@@ -69,17 +68,20 @@ class Devices:
     def update_battery_percentage(self):
         while True:
             if self.auto_update:
-                log.info("battery update")
                 for device in self.device_list:
                     device.update_battery_percentage()
-                time.sleep(15)
+                time.sleep(10)
             else:
                 time.sleep(30)
 
     def cycle(self):
         while True:
             if self.cycle_mode:
-                pass
+                for device in self.device_list:
+                    device.update_charge_status()
+                time.sleep(10)
+            else:
+                time.sleep(30)
 
     def update(self):
         connection_updates = Thread(name='connection', target=self.update_connection)
