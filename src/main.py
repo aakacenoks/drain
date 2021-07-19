@@ -8,7 +8,6 @@ devices = Devices()
 print(devices.to_string())
 devices.update()
 
-
 @app.route('/api/status')
 def status():
     requested_udid = request.args.get('device')
@@ -19,13 +18,11 @@ def status():
             return devices.get(requested_udid).to_dict(), 200
     return {'error': f'Device with udid {requested_udid} not connected.'}, 404
 
-
 @app.route('/api/cycle')
 def cycle():
     devices.cycle_mode = True
     devices.auto_update = True
     return {'message': 'Cycle mode enabled'}, 200
-
 
 @app.route('/api/connect')
 def connect():

@@ -1,5 +1,4 @@
 import subprocess
-
 from logger import log
 from device import Device
 from utils import shell
