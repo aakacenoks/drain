@@ -1,4 +1,6 @@
 import subprocess
+
+from logger import log
 from config.device.device import Device
 from utils import shell
 
@@ -11,6 +13,6 @@ class IOSDevice(Device):
         try:
             charge = shell(f'ideviceinfo -u {self.udid} -q com.apple.mobile.battery -k BatteryCurrentCapacity')
             self.battery_percentage = int(charge)
-        except subprocess.CalledProcessError as error:
-            print('Handling run-time error:', error)
+        except subprocess.CalledProcessError:
+            log.info(f"Could not update battery status for {self.name} ({self.udid}). Check connection.")
 

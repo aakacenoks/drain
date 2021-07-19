@@ -1,6 +1,7 @@
 import subprocess
 from config.device.device import Device
 from utils import shell
+from logger import log
 
 
 class AndroidDevice(Device):
@@ -11,5 +12,5 @@ class AndroidDevice(Device):
         try:
             charge = shell(f"adb -s {self.udid} shell dumpsys battery | grep level | sed -n -e 's/^.*level: //p'")
             self.battery_percentage = int(charge)
-        except (subprocess.CalledProcessError, ValueError) as error:
-            print('Handling run-time error:', error)
+        except (subprocess.CalledProcessError, ValueError):
+            log.info(f"Could not update battery status for {self.name} ({self.udid}). Check connection.")
