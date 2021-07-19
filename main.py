@@ -39,6 +39,5 @@ def connect():
         return {'error': 'Could not connect all ports. Check hub connection.'}, 500
 
 
-
 if __name__ == '__main__':
     app.run()
