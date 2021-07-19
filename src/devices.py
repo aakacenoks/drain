@@ -78,9 +78,7 @@ class Devices:
             if self.cycle_mode:
                 for device in self.device_list:
                     device.update_charge_status()
-                time.sleep(10)
-            else:
-                time.sleep(30)
+            time.sleep(5 * 60)
 
     def update(self):
         connection_updates = Thread(name='connection', target=self.update_connection)

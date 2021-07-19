@@ -28,7 +28,7 @@ class Device:
             log.info(f"{self.name} is drained enough ({self.battery_percentage}/{MIN_BATTERY}). turning on charging.")
             self.charging = True
             self.connect()
-        elif (self.battery_percentage < MIN_BATTERY and self.battery_percentage < MAX_BATTERY) and self.charging:
+        elif (self.battery_percentage < MAX_BATTERY) and self.charging:
             log.info(f"{self.name} is charged ({self.battery_percentage}/{MAX_BATTERY}). continuing the charge.")
             return
         elif self.battery_percentage > MIN_BATTERY and not self.charging:
