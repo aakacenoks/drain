@@ -3,6 +3,7 @@ from config.device.devices import Devices
 from logger import log
 
 app = Flask(__name__)
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
 devices = Devices()
 print(devices.to_string())
