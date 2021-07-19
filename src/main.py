@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify
-from config.device.devices import Devices
-from logger import log
+from devices import Devices
 
 app = Flask(__name__)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True

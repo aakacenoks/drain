@@ -1,7 +1,7 @@
 import subprocess
 
 from logger import log
-from config.device.device import Device
+from device import Device
 from utils import shell
 
 

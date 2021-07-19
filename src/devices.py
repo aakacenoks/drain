@@ -1,10 +1,9 @@
 import json
 import time
-from config.device.android_device import AndroidDevice
-from config.device.ios_device import IOSDevice
+from android_device import AndroidDevice
+from ios_device import IOSDevice
 from utils import read_devices, get_connected_ios_devices, get_connected_android_devices
 from threading import Thread
-from logger import log
 from acroname_manager import enable_all_ports, disable_all_ports
 
 

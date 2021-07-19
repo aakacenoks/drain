@@ -1,5 +1,5 @@
 import subprocess
-from config.device.device import Device
+from device import Device
 from utils import shell
 from logger import log
 
