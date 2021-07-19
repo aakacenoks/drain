@@ -1,5 +1,6 @@
-# drain
-Control mobile device battery charge cycles
+# Drain
+Periodically drain mobile device battery to avoid overcharging. 
+Monitor and control with Acroname USB hubs and Flask REST API.
 
 
 ## Add devices
