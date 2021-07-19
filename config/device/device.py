@@ -34,6 +34,8 @@ class Device:
         elif self.battery_percentage > MIN_BATTERY and not self.charging:
             log.info(f"{self.name} is drained ({self.battery_percentage}/{MIN_BATTERY}). continuing the drain.")
             self.disconnect()
+        else:
+            self.charging = True
 
     def disconnect(self):
         disable_port(self.hub_serial, self.hub_port)
