@@ -24,25 +24,20 @@ def status():
 @app.route('/api/cycle')
 def cycle():
     devices.cycle_mode = True
+    devices.auto_update = True
     return {'message': 'Cycle mode enabled'}, 200
 
 
 @app.route('/api/connect')
 def connect():
-    devices.cycle_mode = False
-    return {'message': 'Cycle mode disabled. All ports connected.'}, 200
+    try:
+        devices.cycle_mode = False
+        devices.auto_update = False
+        devices.connect()
+        return {'message': 'Cycle mode disabled. All ports connected.'}, 200
+    except:
+        return {'error': 'Could not connect all ports. Check hub connection.'}, 500
 
-
-@app.route('/api/noupdate')
-def no_update():
-    devices.auto_update = False
-    return {'message': 'Automatic update disabled'}, 200
-
-
-@app.route('/api/update')
-def update():
-    devices.auto_update = True
-    return {'message': 'Automatic update enabled'}, 200
 
 
 if __name__ == '__main__':
