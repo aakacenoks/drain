@@ -53,16 +53,13 @@ class Devices:
         return None
 
     def update_connection(self):
-        while True:
-            if self.auto_update:
-                android_devices = get_connected_android_devices()
-                ios_devices = get_connected_ios_devices()
-                for device in self.device_list:
-                    if type(device) is AndroidDevice:
-                        device.connected = device.udid in android_devices
-                    else:
-                        device.connected = device.udid in ios_devices
-            time.sleep(30)
+        android_devices = get_connected_android_devices()
+        ios_devices = get_connected_ios_devices()
+        for device in self.device_list:
+            if type(device) is AndroidDevice:
+                device.connected = device.udid in android_devices
+            else:
+                device.connected = device.udid in ios_devices
 
     def update_battery_percentages(self):
         while True:
@@ -80,7 +77,7 @@ class Devices:
                 for device in self.device_list:
                     device.update_charge_status()
                 self.update_connection()
-            time.sleep(60)
+            time.sleep(3 * 60)
 
     def update(self):
         cycles = Thread(name='cycle', target=self.cycle)
