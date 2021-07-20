@@ -77,7 +77,7 @@ class Devices:
     def cycle(self):
         while True:
             if self.cycle_mode:
-                log.info("--- NEW CYCLE ---")
+                log.info("\n--- NEW CYCLE ---")
                 for device in self.device_list:
                     device.update_charge_status()
             time.sleep(60)

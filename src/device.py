@@ -1,4 +1,4 @@
-import json
+import json, time
 from acroname_manager import enable_port, disable_port
 from logger import log
 
@@ -19,6 +19,7 @@ class Device:
 
     def update_charge_status(self):
         self.connect()
+        time.sleep(2)
         self.update_battery_percentage()
         if self.battery_percentage >= MAX_BATTERY and self.charging:
             log.info(f"{self.name} is charged enough ({self.battery_percentage}/{MAX_BATTERY}). turning off charging.")
