@@ -18,7 +18,6 @@ class Device:
         self.charging = True
 
     def update_charge_status(self):
-        self.update_connection()
         self.update_battery_percentage()
         if self.connected:
             if self.battery_percentage >= MAX_BATTERY and self.charging:
@@ -59,7 +58,4 @@ class Device:
         return json.dumps(self.to_dict(), indent=2, sort_keys=True)
 
     def update_battery_percentage(self):
-        pass
-
-    def update_connection(self):
         pass

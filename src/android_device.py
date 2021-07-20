@@ -16,7 +16,3 @@ class AndroidDevice(Device):
             self.battery_percentage = int(charge)
         except (subprocess.CalledProcessError, ValueError):
             log.info(f"Could not update battery status for {self.name} ({self.udid}). Check connection.")
-
-    def update_connection(self):
-        android_devices = get_connected_android_devices()
-        self.connected = self.udid in android_devices

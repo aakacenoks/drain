@@ -31,7 +31,6 @@ def cycle():
         return {'message': 'Cycle mode enabled'}, 200
     return {'message': f'Cycle mode not enabled. There are {processes} appium processes running'}, 405
 
-
 @app.route('/api/connect', methods=['POST'])
 def connect():
     try:
