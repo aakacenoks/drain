@@ -3,8 +3,6 @@ from logger import log
 from device import Device
 from utils import shell
 
-from utils import get_connected_ios_devices
-
 
 class IOSDevice(Device):
     def __init__(self, device_params):

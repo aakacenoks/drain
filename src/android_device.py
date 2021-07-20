@@ -3,8 +3,6 @@ from device import Device
 from utils import shell
 from logger import log
 
-from utils import get_connected_android_devices
-
 
 class AndroidDevice(Device):
     def __init__(self, device_params):
