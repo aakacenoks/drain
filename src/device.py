@@ -15,7 +15,7 @@ class Device:
         self.hub_port = device_params['hub_port']
         self.connected = False
         self.battery_percentage = None
-        self.charging = False
+        self.charging = True
 
     def update_charge_status(self):
         self.connect()

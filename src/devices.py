@@ -60,7 +60,7 @@ class Devices:
                         device.connected = device.udid in android_devices
                     else:
                         device.connected = device.udid in ios_devices
-                time.sleep(10)
+                time.sleep(30)
             else:
                 time.sleep(30)
 
@@ -69,7 +69,7 @@ class Devices:
             if self.auto_update:
                 for device in self.device_list:
                     device.update_battery_percentage()
-                time.sleep(10)
+                time.sleep(30)
             else:
                 time.sleep(30)
 
@@ -78,7 +78,7 @@ class Devices:
             if self.cycle_mode:
                 for device in self.device_list:
                     device.update_charge_status()
-            time.sleep(5 * 60)
+            time.sleep(10)
 
     def update(self):
         connection_updates = Thread(name='connection', target=self.update_connection)
