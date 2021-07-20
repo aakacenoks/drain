@@ -25,7 +25,7 @@ def get_connected_ios_devices():
 
 def get_appium_process_count():
     try:
-        output = shell('ps -ax | grep appium | grep -v grep')
+        output = shell('ps -ax | grep appium | grep iPhone | grep -v grep')
         return len(output.split('\n'))
     except subprocess.CalledProcessError:
         return 0
