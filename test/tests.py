@@ -1,6 +1,6 @@
 import requests
 
-BASE_URL = "http://localhost:5000/api"
+BASE_URL = "http://localhost:5004/api"
 
 def test_cycle_mode():
     response = requests.get(f'{BASE_URL}/cycle')
