@@ -3,6 +3,8 @@ from devices import Devices
 from logger import log
 import threading
 
+from src.utils import get_appium_process_count
+
 app = Flask(__name__)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
@@ -23,9 +25,13 @@ def status():
 
 @app.route('/api/cycle')
 def cycle():
-    devices.cycle_mode = True
-    devices.auto_update = True
-    return {'message': 'Cycle mode enabled'}, 200
+    processes = get_appium_process_count()
+    if processes < 1:
+        devices.cycle_mode = True
+        devices.auto_update = True
+        return {'message': 'Cycle mode enabled'}, 200
+    return {'message': f'Cycle mode not enabled. There are {processes} appium processes running'}, 405
+
 
 @app.route('/api/connect')
 def connect():

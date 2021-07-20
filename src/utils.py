@@ -23,6 +23,13 @@ def get_connected_ios_devices():
     output = shell('idevice_id --list')
     return get_connected_devices(output.split('\n'))
 
+def get_appium_process_count():
+    try:
+        output = shell('ps -ax | grep appium | grep -v grep')
+        return len(output.split('\n'))
+    except subprocess.CalledProcessError:
+        return 0
+
 def read_devices():
     with open("config/devices.yaml", 'r') as stream:
         try:
