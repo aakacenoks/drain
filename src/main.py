@@ -1,5 +1,7 @@
 from flask import Flask, request, jsonify
 from devices import Devices
+from logger import log
+import threading
 
 app = Flask(__name__)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
@@ -16,6 +18,7 @@ def status():
     else:
         if devices.contains(requested_udid):
             return devices.get(requested_udid).to_dict(), 200
+    log.info(f'active number of threads: {threading.active_count()}')
     return {'error': f'Device with udid {requested_udid} not connected.'}, 404
 
 @app.route('/api/cycle')
