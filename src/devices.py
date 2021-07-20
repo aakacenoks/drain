@@ -32,6 +32,7 @@ class Devices:
     def connect(self):
         for hub in self.hubs:
             enable_all_ports(hub)
+        time.sleep(3)
 
     def to_dict(self):
         return [device.to_dict() for device in self.device_list]
@@ -77,6 +78,7 @@ class Devices:
     def cycle(self):
         while True:
             if self.cycle_mode:
+                self.connect()
                 log.info("\n--- NEW CYCLE ---")
                 for device in self.device_list:
                     device.update_charge_status()
