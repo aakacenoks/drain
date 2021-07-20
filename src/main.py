@@ -12,13 +12,13 @@ devices.update()
 
 @app.route('/api/status')
 def status():
+    log.info(f'active number of threads: {threading.active_count()}')
     requested_udid = request.args.get('device')
     if requested_udid is None:
         return jsonify(devices.to_dict()), 200
     else:
         if devices.contains(requested_udid):
             return devices.get(requested_udid).to_dict(), 200
-    log.info(f'active number of threads: {threading.active_count()}')
     return {'error': f'Device with udid {requested_udid} not connected.'}, 404
 
 @app.route('/api/cycle')
