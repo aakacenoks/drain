@@ -3,7 +3,7 @@ from devices import Devices
 from logger import log
 import threading
 
-from src.utils import get_appium_process_count
+from utils import get_appium_process_count
 
 app = Flask(__name__)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
