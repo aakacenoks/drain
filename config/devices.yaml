@@ -2,40 +2,40 @@ devices:
   - name: Galaxy S3
     os: Android
     udid: 4df1664555135f51
-    hub_serial: 0
+    hub_serial: 268992103
     hub_port: 0
   - name: OnePlus 6
     os: Android
     udid: 139acc99
-    hub_serial: 0
+    hub_serial: 268992103
     hub_port: 0
   - name: Galaxy XCover
     os: Android
     udid: R58R12DB3TL
-    hub_serial: 0
+    hub_serial: 268992103
     hub_port: 0
   - name: Nexus 5X
     os: Android
     udid: 0133f2e9e2add266
-    hub_serial: 0
+    hub_serial: 268992103
     hub_port: 0
   - name: Huawei Mate 10 Lite
     os: Android
     udid: FFY5T18721015939
-    hub_serial: 0
+    hub_serial: 268992103
     hub_port: 0
   - name: Xiaomi Redmi Go
     os: Android
     udid: a9c4aa9f7d95
-    hub_serial: 0
+    hub_serial: 268992103
     hub_port: 0
   - name: iPhone SE
     os: iOS
     udid: 55b9951eb98d2cbf12e097b19d97466d9f4fe1a1
-    hub_serial: 0
+    hub_serial: 1736182291
     hub_port: 0
   - name: iPhone 11
     os: iOS
     udid: 00008030-001908D101D0802E
-    hub_serial: 0
+    hub_serial: 1736182291
     hub_port: 0
