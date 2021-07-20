@@ -79,7 +79,8 @@ class Devices:
         while True:
             if self.cycle_mode:
                 self.connect()
-                log.info("\n--- NEW CYCLE ---")
+                log.info("")
+                log.info("--- NEW CYCLE ---")
                 for device in self.device_list:
                     device.update_charge_status()
             time.sleep(60)
