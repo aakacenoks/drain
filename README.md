@@ -1,6 +1,6 @@
 # Drain
 Periodically drain or charge mobile device battery to avoid overcharging. 
-Monitor and control with Acroname USB hubs and Flask REST API.
+Monitor and control with Acroname USB hubs and Flask REST API. Tested on macOS.
 
 
 ## Add devices
