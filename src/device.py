@@ -18,23 +18,25 @@ class Device:
         self.charging = True
 
     def update_charge_status(self):
+        self.update_connection()
         self.update_battery_percentage()
-        if self.battery_percentage >= MAX_BATTERY and self.charging:
-            log.info(f"{self.name} is charged enough ({self.battery_percentage}/{MAX_BATTERY}). turning off charging.")
-            self.charging = False
-            self.disconnect()
-        elif self.battery_percentage <= MIN_BATTERY and not self.charging:
-            log.info(f"{self.name} is drained enough ({self.battery_percentage}/{MIN_BATTERY}). turning on charging.")
-            self.charging = True
-            self.connect()
-        elif (self.battery_percentage < MAX_BATTERY) and self.charging:
-            log.info(f"{self.name} is charging ({self.battery_percentage}/{MAX_BATTERY}). continuing the charge.")
-            return
-        elif self.battery_percentage > MIN_BATTERY and not self.charging:
-            log.info(f"{self.name} is draining ({self.battery_percentage}/{MIN_BATTERY}). continuing the drain.")
-            self.disconnect()
-        else:
-            self.charging = True
+        if self.connected:
+            if self.battery_percentage >= MAX_BATTERY and self.charging:
+                log.info(f"{self.name} is charged enough ({self.battery_percentage}/{MAX_BATTERY}). turning off charging.")
+                self.charging = False
+                self.disconnect()
+            elif self.battery_percentage <= MIN_BATTERY and not self.charging:
+                log.info(f"{self.name} is drained enough ({self.battery_percentage}/{MIN_BATTERY}). turning on charging.")
+                self.charging = True
+                self.connect()
+            elif (self.battery_percentage < MAX_BATTERY) and self.charging:
+                log.info(f"{self.name} is charging ({self.battery_percentage}/{MAX_BATTERY}). continuing the charge.")
+                return
+            elif self.battery_percentage > MIN_BATTERY and not self.charging:
+                log.info(f"{self.name} is draining ({self.battery_percentage}/{MIN_BATTERY}). continuing the drain.")
+                self.disconnect()
+            else:
+                self.charging = True
 
     def disconnect(self):
         disable_port(self.hub_serial, self.hub_port)
@@ -57,4 +59,7 @@ class Device:
         return json.dumps(self.to_dict(), indent=2, sort_keys=True)
 
     def update_battery_percentage(self):
+        pass
+
+    def update_connection(self):
         pass

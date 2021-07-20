@@ -73,7 +73,6 @@ class Devices:
             if self.cycle_mode:
                 self.connect()
                 log.info("")
-                log.info("--- NEW CYCLE ---")
                 for device in self.device_list:
                     device.update_charge_status()
                 self.update_connection()

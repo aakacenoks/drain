@@ -3,6 +3,8 @@ from logger import log
 from device import Device
 from utils import shell
 
+from utils import get_connected_ios_devices
+
 
 class IOSDevice(Device):
     def __init__(self, device_params):
@@ -15,3 +17,6 @@ class IOSDevice(Device):
         except subprocess.CalledProcessError:
             log.info(f"Could not update battery status for {self.name} ({self.udid}). Check connection.")
 
+    def update_connection(self):
+        ios_devices = get_connected_ios_devices()
+        self.connected = self.udid in ios_devices
