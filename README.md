@@ -20,7 +20,7 @@ devices:
     hub_serial: 44933564
     hub_port: 2
 ```
-## Resolve dependencies
+## Resolve dependencies (python3)
 ```
 pip install -r requirements.txt
 ```
