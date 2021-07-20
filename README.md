@@ -27,7 +27,7 @@ pip install -r requirements.txt
 
 ## Run server
 ```
-export FLASK_APP=src/main.py; export FLASK_ENV=production; flask run
+export FLASK_APP=src/main.py; export FLASK_ENV=production; flask run --port=5004
 ```
 
 ## Run tests
