@@ -1,11 +1,41 @@
 devices:
-  - name: Pixel
+  - name: Galaxy S3
     os: Android
-    udid: 98261FFBA001GR
-    hub_serial: 11212
-    hub_port: 1
-  - name: iPhone XS Max
+    udid: 4df1664555135f51
+    hub_serial: 0
+    hub_port: 0
+  - name: OnePlus 6
+    os: Android
+    udid: 139acc99
+    hub_serial: 0
+    hub_port: 0
+  - name: Galaxy XCover
+    os: Android
+    udid: R58R12DB3TL
+    hub_serial: 0
+    hub_port: 0
+  - name: Nexus 5X
+    os: Android
+    udid: 0133f2e9e2add266
+    hub_serial: 0
+    hub_port: 0
+  - name: Huawei Mate 10 Lite
+    os: Android
+    udid: FFY5T18721015939
+    hub_serial: 0
+    hub_port: 0
+  - name: Xiaomi Redmi Go
+    os: Android
+    udid: a9c4aa9f7d95
+    hub_serial: 0
+    hub_port: 0
+  - name: iPhone SE
     os: iOS
-    udid: 1faff2315aa7d5cefcf0d5e0df3f589e714141e6
-    hub_serial: 11212
-    hub_port: 2
+    udid: 55b9951eb98d2cbf12e097b19d97466d9f4fe1a1
+    hub_serial: 0
+    hub_port: 0
+  - name: iPhone 11
+    os: iOS
+    udid: 00008030-001908D101D0802E
+    hub_serial: 0
+    hub_port: 0
