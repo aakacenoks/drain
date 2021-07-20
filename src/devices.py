@@ -1,6 +1,7 @@
 import json
 import time
 from android_device import AndroidDevice
+from logger import log
 from ios_device import IOSDevice
 from utils import read_devices, get_connected_ios_devices, get_connected_android_devices
 from threading import Thread
@@ -76,17 +77,18 @@ class Devices:
     def cycle(self):
         while True:
             if self.cycle_mode:
+                log.info("--- NEW CYCLE ---")
                 for device in self.device_list:
                     device.update_charge_status()
-            time.sleep(10)
+            time.sleep(60)
 
     def update(self):
-        connection_updates = Thread(name='connection', target=self.update_connection)
-        connection_updates.setDaemon(True)
-        connection_updates.start()
-        battery_updates = Thread(name='battery', target=self.update_battery_percentage)
-        battery_updates.setDaemon(True)
-        battery_updates.start()
+        # connection_updates = Thread(name='connection', target=self.update_connection)
+        # connection_updates.setDaemon(True)
+        # connection_updates.start()
+        # battery_updates = Thread(name='battery', target=self.update_battery_percentage)
+        # battery_updates.setDaemon(True)
+        # battery_updates.start()
         cycles = Thread(name='cycle', target=self.cycle)
         cycles.setDaemon(True)
         cycles.start()
