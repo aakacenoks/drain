@@ -5,7 +5,7 @@ from logger import log
 from ios_device import IOSDevice
 from utils import read_devices, get_connected_ios_devices, get_connected_android_devices
 from threading import Thread
-from acroname_manager import enable_all_ports, disable_all_ports
+from hub_manager import enable_all_ports, disable_all_ports
 
 
 class Devices:

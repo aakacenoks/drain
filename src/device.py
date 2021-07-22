@@ -1,5 +1,5 @@
 import json
-from acroname_manager import enable_port, disable_port
+from hub_manager import enable_port, disable_port
 from logger import log
 
 MAX_BATTERY = 80
