@@ -3,6 +3,16 @@ Periodically drain or charge mobile device battery to avoid overcharging.
 Monitor and control with Acroname USB hubs and Flask REST API. Tested on macOS.
 
 
+## Endpoints
+Server run by default on 0.0.0.0:5004
+
+
+`GET /api/status/` - Get current device status
+
+`POST /api/connect/` - Connect all devices
+
+`POST /api/cycle/` - Put devices in charging cycle mode (charge to 80%, drain to 30%)
+
 ## Add devices
 List of test devices is defined in file `config/devices.yaml`
 
