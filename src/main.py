@@ -29,7 +29,7 @@ def cycle():
         devices.cycle_mode = True
         devices.auto_update = True
         return {'message': 'cycle mode enabled'}, 200
-    message = f'cycle mode not enabled. there are {processes} appium processes running'
+    message = f'cycle mode requested but not enabled. there are {processes} appium processes running'
     log.info(message)
     return {'message': message}, 405
 
