@@ -28,8 +28,10 @@ def cycle():
     if processes < 1:
         devices.cycle_mode = True
         devices.auto_update = True
-        return {'message': 'Cycle mode enabled'}, 200
-    return {'message': f'Cycle mode not enabled. There are {processes} appium processes running'}, 405
+        return {'message': 'cycle mode enabled'}, 200
+    message = f'cycle mode not enabled. there are {processes} appium processes running'
+    log.info(message)
+    return {'message': message}, 405
 
 @app.route('/api/connect', methods=['POST'])
 def connect():
@@ -37,9 +39,11 @@ def connect():
         devices.cycle_mode = False
         devices.auto_update = False
         devices.connect()
-        return {'message': 'Cycle mode disabled. All ports connected.'}, 200
+        return {'message': 'cycle mode disabled, all ports connected.'}, 200
     except:
-        return {'error': 'Could not connect all ports. Check hub connection.'}, 500
+        message = f'could not connect all ports. check hub connection'
+        log.info(message)
+        return {'message': message}, 500
 
 
 if __name__ == '__main__':
