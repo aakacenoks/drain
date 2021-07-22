@@ -12,10 +12,10 @@ def test_connect():
     response = requests.post(f'{BASE_URL}/connect')
     response_body = response.json()
     assert response.status_code == 200
-    assert response_body["message"] == "Cycle mode disabled. All ports connected."
+    assert response_body["message"] == "cycle mode disabled. all ports connected."
 
 def test_cycle_mode():
     response = requests.post(f'{BASE_URL}/cycle')
     response_body = response.json()
     assert response.status_code == 200
-    assert response_body["message"] == "Cycle mode enabled"
+    assert response_body["message"] == "cycle mode enabled"
