@@ -1,6 +1,6 @@
 import subprocess
 import yaml
-
+from logger import log
 
 def shell(command):
     byte_output = subprocess.check_output(command, shell=True)
@@ -16,12 +16,18 @@ def get_connected_devices(output_lines):
     return connected_devices
 
 def get_connected_android_devices():
-    output = shell('adb devices')
-    return get_connected_devices(output.split('\n')[1:])
+    try:
+        output = shell('adb devices')
+        return get_connected_devices(output.split('\n')[1:])
+    except subprocess.CalledProcessError:
+        log.info('no android devices attached')
 
 def get_connected_ios_devices():
-    output = shell('idevice_id --list')
-    return get_connected_devices(output.split('\n'))
+    try:
+        output = shell('idevice_id --list')
+        return get_connected_devices(output.split('\n'))
+    except subprocess.CalledProcessError:
+        log.info('no iOS devices attached')
 
 def get_appium_process_count():
     try:
