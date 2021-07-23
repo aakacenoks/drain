@@ -4,7 +4,7 @@ Monitor and control with Acroname USB hubs and Flask REST API. Tested on macOS.
 
 
 ## Endpoints
-Local address: `0.0.0.0:5004`, remote address: `10.1.10.28:5004`
+Local address: `0.0.0.0:5004`
 
 
 `GET /api/status/` - Get current device status
