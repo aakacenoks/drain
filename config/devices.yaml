@@ -14,9 +14,9 @@ devices:
     udid: R58R12DB3TL
     hub_serial: 1736182291
     hub_port: 6
-  - name: Nexus 5X
+  - name: CAT_S52
     os: Android
-    udid: 0133f2e9e2add266
+    udid: S521946012935
     hub_serial: 1736182291
     hub_port: 1
   - name: Huawei Mate 10 Lite
@@ -39,9 +39,9 @@ devices:
     udid: 00008030-001908D101D0802E
     hub_serial: 268992103
     hub_port: 2
-  - name: Huawei P20 Lite
+  - name: Huawei P30 Pro
     os: Android
-    udid: 9WV4C18813010171
+    udid: EHT0220602002159
     hub_serial: 268992103
     hub_port: 1
   - name: Samsung Galaxy S8 Plus
