@@ -39,6 +39,7 @@ def connect():
         devices.cycle_mode = False
         devices.auto_update = False
         devices.connect()
+        devices.update_connection()
         return {'message': 'cycle mode disabled. all ports connected. ready for testing.'}, 200
     except:
         message = f'could not connect all ports. check hub connection'
