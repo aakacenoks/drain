@@ -1,11 +1,46 @@
 devices:
-  - name: Pixel 3XL
+  - name: Moto e6 play
     os: Android
-    udid: xxx
-    hub_serial: 70000000
+    udid: ZE2228GP2G
+    hub_serial: 1736182291
+    hub_port: 3
+  - name: OnePlus 6
+    os: Android
+    udid: 139acc99
+    hub_serial: 1736182291
+    hub_port: 4
+  - name: Galaxy XCover
+    os: Android
+    udid: R58R12DB3TL
+    hub_serial: 1736182291
+    hub_port: 6
+  - name: CAT_S52
+    os: Android
+    udid: S521946012935
+    hub_serial: 1736182291
     hub_port: 1
   - name: iPhone XS Max
     os: iOS
-    udid: xxx
-    hub_serial: 40000000
+    udid: 55b9951eb98d2cbf12e097b19d97466d9f4fe1a1
+    hub_serial: 268992103
+    hub_port: 0
+  - name: iPhone 11
+    os: iOS
+    udid: 00008030-001908D101D0802E
+    hub_serial: 268992103
     hub_port: 2
+  - name: Huawei P30 Pro
+    os: Android
+    udid: EHT0220602002159
+    hub_serial: 268992103
+    hub_port: 1
+  - name: Samsung Galaxy S8 Plus
+    os: Android
+    udid: ce0317133be7208b0c
+    hub_serial: 268992103
+    hub_port: 3
+  - name: Samsung A51
+    os: Android
+    udid: R58NC2KSV8E
+    hub_serial: 268992103
+    hub_port: 5
