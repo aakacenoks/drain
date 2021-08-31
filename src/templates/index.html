@@ -60,7 +60,11 @@
                 $.ajax({
                     type: "POST",
                     url: 'http://0.0.0.0:5004/api/connect',
-                    success:function(response){
+                    success: function(){
+                       location.reload();
+                    },
+                    error: function(response) {
+                       alert(JSON.stringify(response))
                        location.reload();
                     }
                  })
@@ -69,7 +73,11 @@
                 $.ajax({
                     type: "POST",
                     url: 'http://0.0.0.0:5004/api/cycle',
-                    success:function(response){
+                    success: function(){
+                       location.reload();
+                    },
+                    error: function(response) {
+                       alert(JSON.stringify(response))
                        location.reload();
                     }
                  })
