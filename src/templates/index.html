@@ -60,7 +60,7 @@
             function connectDevices(){
                 $.ajax({
                     type: "POST",
-                    url: 'http://localhost:5004/api/connect',
+                    url: 'http://10.1.10.28:5004/api/connect',
                     success: function(){
                        location.reload();
                     },
@@ -73,7 +73,7 @@
             function enableCycleMode(){
                 $.ajax({
                     type: "POST",
-                    url: 'http://localhost:5004/api/cycle',
+                    url: 'http://10.1.10.28:5004/api/cycle',
                     success: function(){
                        location.reload();
                     },
