@@ -49,7 +49,7 @@
                         <img class="battery-icon" src="static/battery.svg" alt="battery">
                         <a>{{device.battery_percentage}}%</a><br>
                         <div style="text-align:center">
-                            <a href="#" class="btn btn-primary btn-connect">Connect</a>
+                            <a href="#" data-value="{{device.udid}}" onclick='connectDevice($(this).data("value"))' class="btn btn-primary btn-connect">Connect</a>
                         </div>
                     </div>
                 </div>
@@ -60,6 +60,7 @@
             function connectDevices(){
                 $.ajax({
                     type: "POST",
+                    async: false,
                     url: 'http://10.1.10.28:5004/api/connect',
                     success: function(){
                        location.reload();
@@ -73,7 +74,24 @@
             function enableCycleMode(){
                 $.ajax({
                     type: "POST",
+                    async: false,
                     url: 'http://10.1.10.28:5004/api/cycle',
+                    success: function(){
+                       location.reload();
+                    },
+                    error: function(response) {
+                       alert(JSON.stringify(response))
+                       location.reload();
+                    }
+                 })
+            }
+            function connectDevice(udid){
+                $.ajax({
+                    type: "POST",
+                    async: false,
+                    url: 'http://10.1.10.28:5004/api/connect',
+                    data: JSON.stringify({device: udid}),
+                    contentType: "application/json",
                     success: function(){
                        location.reload();
                     },

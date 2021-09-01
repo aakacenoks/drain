@@ -28,7 +28,7 @@ def status():
     else:
         if devices.contains(requested_udid):
             return devices.get(requested_udid).to_dict(), 200
-    return {'error': f'Device with udid {requested_udid} not connected.'}, 404
+    return {'error': f'device with udid {requested_udid} not connected.'}, 404
 
 @app.route('/api/cycle', methods=['POST'])
 @cross_origin()
@@ -46,11 +46,19 @@ def cycle():
 @cross_origin()
 def connect():
     try:
-        devices.cycle_mode = False
-        devices.auto_update = False
-        devices.connect()
-        devices.update_connection()
-        return {'message': 'cycle mode disabled. all ports connected. ready for testing.'}, 200
+        if request.data:
+            log.info(request.json.items())
+            key_value_pair = list(request.json.items())
+            if key_value_pair[0][0] == 'device':
+                devices.connect_device(key_value_pair[0][1])
+            else:
+                return {'error': 'wrong payload. try: {device: udid}'}, 405
+        else:
+            devices.cycle_mode = False
+            devices.auto_update = False
+            devices.connect()
+            devices.update_connection()
+            return {'message': 'cycle mode disabled. all ports connected. ready for testing.'}, 200
     except:
         message = f'could not connect all ports. check hub connection'
         log.info(message)
