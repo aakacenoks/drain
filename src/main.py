@@ -47,7 +47,6 @@ def cycle():
 def connect():
     try:
         if request.data:
-            log.info(request.json.items())
             key_value_pair = list(request.json.items())
             if key_value_pair[0][0] == 'device':
                 devices.connect_device(key_value_pair[0][1])
