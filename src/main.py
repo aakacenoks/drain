@@ -50,12 +50,14 @@ def connect():
             key_value_pair = list(request.json.items())
             if key_value_pair[0][0] == 'device':
                 devices.connect_device(key_value_pair[0][1])
-                return {'message': f'device {key_value_pair[0][1]} connected'}, 200
+                log.info(f'individual device {key_value_pair[0][1]} connected')
+                return {'message': f'individual device {key_value_pair[0][1]} connected'}, 200
             return {'error': 'wrong payload. try: {device: udid}'}, 405
         devices.cycle_mode = False
         devices.auto_update = False
         devices.connect()
         devices.update_connection()
+        log.info('cycle mode disabled. all ports connected. ready for testing.')
         return {'message': 'cycle mode disabled. all ports connected. ready for testing.'}, 200
     except:
         message = f'could not connect all ports. check hub connection'
