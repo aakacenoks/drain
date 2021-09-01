@@ -19,7 +19,17 @@ devices:
     udid: S521946012935
     hub_serial: 1736182291
     hub_port: 1
-  - name: iPhone XS Max
+  - name: Huawei Mate 10 Lite
+    os: Android
+    udid: FFY5T18721015939
+    hub_serial: 1736182291
+    hub_port: 2
+  - name: Xiaomi Redmi Go
+    os: Android
+    udid: a9c4aa9f7d95
+    hub_serial: 1736182291
+    hub_port: 0
+  - name: iPhone SE
     os: iOS
     udid: 55b9951eb98d2cbf12e097b19d97466d9f4fe1a1
     hub_serial: 268992103
