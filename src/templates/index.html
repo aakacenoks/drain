@@ -38,7 +38,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{device.name}}</h5>
                         <h6 class="card-subtitle mb-2 text-muted">{{device.os}}</h6>
-                        {% if device.charging %}
+                        {% if device.connected %}
                             <span class="badge badge-success" style="background-color: green;">Connected</span><br>
                         {% else %}
                             <span class="badge badge-warning" style="background-color: orange;">Disconnected</span><br>
