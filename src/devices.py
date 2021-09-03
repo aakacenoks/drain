@@ -53,16 +53,12 @@ class Devices:
         return None
 
     def connect_device(self, udid):
-        for device in self.device_list:
-            if device.udid == udid:
-                device.connect()
-                return
+        device = self.get(udid)
+        device.connect()
 
     def disconnect_device(self, udid):
-        for device in self.device_list:
-            if device.udid == udid:
-                device.disconnect()
-                return
+        device = self.get(udid)
+        device.disconnect()
 
     def update_connection(self):
         android_devices = get_connected_android_devices()
