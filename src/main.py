@@ -36,7 +36,6 @@ def cycle():
     processes = get_appium_process_count()
     if processes < 1:
         devices.cycle_mode = True
-        devices.auto_update = True
         return {'message': 'cycle mode enabled'}, 200
     message = f'cycle mode requested but not enabled. there are {processes} appium processes running'
     log.info(message)
@@ -55,7 +54,6 @@ def connect():
                 return {'message': f'individual device {key_value_pair[0][1]} connected'}, 200
             return {'error': 'wrong payload. try: {device: udid}'}, 405
         devices.cycle_mode = False
-        devices.auto_update = False
         devices.connect()
         devices.update_connection()
         devices.update_battery_percentages()

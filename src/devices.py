@@ -3,28 +3,26 @@ import time
 from android_device import AndroidDevice
 from logger import log
 from ios_device import IOSDevice
-from utils import read_devices, get_connected_ios_devices, get_connected_android_devices
+from utils import read_devices_from_config, get_connected_ios_devices, get_connected_android_devices
 from threading import Thread
 from hub_manager import enable_all_ports, disable_all_ports
 
-BATTERY_CHECK_INTERVAL = 3 * 60
+BATTERY_CHECK_INTERVAL = 3 * 60  # 3 minutes
 
 class Devices:
     def __init__(self):
-        self.device_list = self.generate_devices()
-        self.auto_update = True
+        self.device_list = []
+        self.populate_device_list()
         self.cycle_mode = True
         self.hubs = set([device.hub_serial for device in self.device_list])
 
-    def generate_devices(self):
-        generated_devices = []
-        device_list = read_devices()
+    def populate_device_list(self):
+        device_list = read_devices_from_config()
         for device_params in device_list['devices']:
             if device_params['os'].lower() == "android":
-                generated_devices.append(AndroidDevice(device_params))
+                self.device_list.append(AndroidDevice(device_params))
             else:
-                generated_devices.append(IOSDevice(device_params))
-        return generated_devices
+                self.device_list.append(IOSDevice(device_params))
 
     def disconnect(self):
         for hub in self.hubs:

@@ -36,7 +36,7 @@ def get_appium_process_count():
     except subprocess.CalledProcessError:
         return 0
 
-def read_devices():
+def read_devices_from_config():
     with open("config/devices.yaml", 'r') as stream:
         try:
             return yaml.safe_load(stream)
