@@ -1,6 +1,6 @@
 import subprocess
 import yaml
-from logger import log
+from src.logger import log
 
 def shell(command):
     byte_output = subprocess.check_output(command, shell=True)
@@ -36,8 +36,8 @@ def get_appium_process_count():
     except subprocess.CalledProcessError:
         return 0
 
-def read_devices_from_config():
-    with open("config/devices.yaml", 'r') as stream:
+def read_config_file():
+    with open("config.yaml", 'r') as stream:
         try:
             return yaml.safe_load(stream)
         except yaml.YAMLError as exc:

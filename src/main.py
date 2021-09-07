@@ -1,10 +1,11 @@
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS, cross_origin
-from devices import Devices
-from logger import log
-import threading, atexit
+from src.devices import Devices
+from src.logger import log
+import threading
+import atexit
 
-from utils import get_appium_process_count
+from src.utils import get_appium_process_count
 
 app = Flask(__name__)
 cors = CORS(app)

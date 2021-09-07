@@ -1,6 +1,6 @@
 import brainstem
 from brainstem.result import Result
-from logger import log
+from src.logger import log
 
 
 def connect_to_hub(serial_number):

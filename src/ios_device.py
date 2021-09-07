@@ -1,7 +1,7 @@
 import subprocess
-from logger import log
-from device import Device
-from utils import shell
+from src.logger import log
+from src.device import Device
+from src.utils import shell
 
 
 class IOSDevice(Device):

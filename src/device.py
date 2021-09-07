@@ -1,17 +1,16 @@
 import json
-from hub_manager import enable_port, disable_port
-from logger import log
+from src.hub_manager import enable_port, disable_port
+from src.constants import MAX_BATTERY, MIN_BATTERY
+from src.logger import log
 
-MAX_BATTERY = 80
-MIN_BATTERY = 30
 
 class Device:
     def __init__(self, device_params):
         self.name = device_params['name']
         self.os = device_params['os']
         self.udid = device_params['udid']
-        self.hub_serial = device_params['hub_serial']
-        self.hub_port = device_params['hub_port']
+        self.hub_serial = device_params['hub-serial']
+        self.hub_port = device_params['hub-port']
         self.connected = False
         self.battery_percentage = 0
         self.charging = True

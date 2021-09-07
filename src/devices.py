@@ -1,13 +1,13 @@
 import json
 import time
-from android_device import AndroidDevice
-from logger import log
-from ios_device import IOSDevice
-from utils import read_devices_from_config, get_connected_ios_devices, get_connected_android_devices
+from src.android_device import AndroidDevice
+from src.logger import log
+from src.ios_device import IOSDevice
+from src.utils import read_config_file, get_connected_ios_devices, get_connected_android_devices
 from threading import Thread
-from hub_manager import enable_all_ports, disable_all_ports
+from src.hub_manager import enable_all_ports, disable_all_ports
+from src.constants import BATTERY_CHECK_INTERVAL
 
-BATTERY_CHECK_INTERVAL = 3 * 60  # 3 minutes
 
 class Devices:
     def __init__(self):
@@ -17,7 +17,7 @@ class Devices:
         self.hubs = set([device.hub_serial for device in self.device_list])
 
     def populate_device_list(self):
-        device_list = read_devices_from_config()
+        device_list = read_config_file()
         for device_params in device_list['devices']:
             if device_params['os'].lower() == "android":
                 self.device_list.append(AndroidDevice(device_params))
