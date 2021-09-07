@@ -13,4 +13,4 @@ class AndroidDevice(Device):
             charge = shell(f"adb -s {self.udid} shell dumpsys battery | grep level | sed -n -e 's/^.*level: //p'")
             self.battery_percentage = int(charge)
         except (subprocess.CalledProcessError, ValueError):
-            log.info(f"Could not update battery status for {self.name} ({self.udid}). Check connection.")
+            log.warning(f"Could not update battery status for {self.name} ({self.udid}). Check connection.")
