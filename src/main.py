@@ -49,8 +49,9 @@ def connect():
         if request.data:
             key_value_pair = list(request.json.items())
             if key_value_pair[0][0] == 'device':
-                devices.connect_device(key_value_pair[0][1])
-                log.info(f'individual device {key_value_pair[0][1]} connected')
+                udid = key_value_pair[0][1]
+                devices.connect_device(udid)
+                log.info(f'individual device {udid} connected')
                 return {'message': f'individual device {key_value_pair[0][1]} connected'}, 200
             return {'error': 'wrong payload. try: {device: udid}'}, 405
         devices.cycle_mode = False
