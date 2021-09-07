@@ -32,6 +32,7 @@ class Devices:
         for hub in self.hubs:
             enable_all_ports(hub)
         time.sleep(3)
+        self.update_connections()
 
     def to_dict(self):
         return [device.to_dict() for device in self.device_list]
@@ -59,7 +60,7 @@ class Devices:
         device = self.get(udid)
         device.disconnect()
 
-    def update_connection(self):
+    def update_connections(self):
         android_devices = get_connected_android_devices()
         ios_devices = get_connected_ios_devices()
         for device in self.device_list:
@@ -76,11 +77,10 @@ class Devices:
         while True:
             if self.cycle_mode:
                 self.connect()
-                self.update_connection()
-                log.info("")
+                log.info("cycle update")
                 for device in self.device_list:
                     device.update_charge_status()
-                self.update_connection()
+                self.update_connections()
             time.sleep(BATTERY_CHECK_INTERVAL)
 
     def update(self):

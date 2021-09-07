@@ -38,11 +38,9 @@ class Device:
 
     def disconnect(self):
         disable_port(self.hub_serial, self.hub_port)
-        self.connected = False
 
     def connect(self):
         enable_port(self.hub_serial, self.hub_port)
-        self.connected = True
 
     def to_dict(self):
         return {

@@ -55,7 +55,6 @@ def connect():
             return {'error': 'wrong payload. try: {device: udid}'}, 405
         devices.cycle_mode = False
         devices.connect()
-        devices.update_connection()
         devices.update_battery_percentages()
         log.info('cycle mode disabled. all ports connected. ready for testing.')
         return {'message': 'cycle mode disabled. all ports connected. ready for testing.'}, 200
