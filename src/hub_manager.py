@@ -8,7 +8,7 @@ def connect_to_hub(serial_number):
     result = stem.discoverAndConnect(1, serial_number=serial_number)
     if result == Result.NO_ERROR:
         return stem
-    log.info("Error Connecting to USBHub3p(). Make sure you are using the correct module object")
+    log.info("error connecting to USB hub. make sure you are using the correct module object")
 
 def disable_all_ports(serial_number):
     stem = connect_to_hub(serial_number)

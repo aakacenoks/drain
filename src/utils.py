@@ -41,4 +41,4 @@ def read_devices_from_config():
         try:
             return yaml.safe_load(stream)
         except yaml.YAMLError as exc:
-            raise Exception(f'Could not read config file: {exc}')
+            raise Exception(f'could not read config file: {exc}')

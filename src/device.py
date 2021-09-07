@@ -5,7 +5,6 @@ from logger import log
 MAX_BATTERY = 80
 MIN_BATTERY = 30
 
-
 class Device:
     def __init__(self, device_params):
         self.name = device_params['name']
