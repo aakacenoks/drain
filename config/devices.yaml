@@ -38,7 +38,7 @@ devices:
     os: iOS
     udid: 00008030-001908D101D0802E
     hub_serial: 268992103
-    hub_port: 2
+    hub_port: 6
   - name: Huawei P30 Pro
     os: Android
     udid: EHT0220602002159
@@ -54,3 +54,8 @@ devices:
     udid: R58NC2KSV8E
     hub_serial: 268992103
     hub_port: 5
+  - name: iPhone X
+    os: iOS
+    udid: 4227971ef70809f0eb0cf2bb2baf35fdc6853c7e
+    hub_serial: 268992103
+    hub_port: 2
