@@ -60,7 +60,6 @@
             function connectDevices(){
                 $.ajax({
                     type: "POST",
-                    async: false,
                     url: 'http://10.1.10.28:5004/api/connect',
                     success: function(){
                        location.reload();
@@ -74,7 +73,6 @@
             function enableCycleMode(){
                 $.ajax({
                     type: "POST",
-                    async: false,
                     url: 'http://10.1.10.28:5004/api/cycle',
                     success: function(){
                        location.reload();
@@ -88,7 +86,6 @@
             function connectDevice(udid){
                 $.ajax({
                     type: "POST",
-                    async: false,
                     url: 'http://10.1.10.28:5004/api/connect',
                     data: JSON.stringify({device: udid}),
                     contentType: "application/json",
