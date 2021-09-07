@@ -44,9 +44,9 @@ devices:
     udid: EHT0220602002159
     hub_serial: 268992103
     hub_port: 1
-  - name: Samsung Galaxy S8 Plus
+  - name: Samsung Galaxy A8 2018
     os: Android
-    udid: ce0317133be7208b0c
+    udid: 52005c37523f8543
     hub_serial: 268992103
     hub_port: 3
   - name: Samsung A51
