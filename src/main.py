@@ -51,6 +51,7 @@ def connect():
             if key_value_pair[0][0] == 'device':
                 udid = key_value_pair[0][1]
                 devices.connect_device(udid)
+                devices.update_connections()
                 log.info(f'individual device {udid} connected')
                 return {'message': f'individual device {key_value_pair[0][1]} connected'}, 200
             return {'error': 'wrong payload. try: {device: udid}'}, 405
