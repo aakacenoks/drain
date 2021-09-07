@@ -7,6 +7,7 @@ from utils import read_devices, get_connected_ios_devices, get_connected_android
 from threading import Thread
 from hub_manager import enable_all_ports, disable_all_ports
 
+BATTERY_CHECK_INTERVAL = 3 * 60
 
 class Devices:
     def __init__(self):
@@ -70,11 +71,8 @@ class Devices:
                 device.connected = device.udid in ios_devices
 
     def update_battery_percentages(self):
-        while True:
-            if self.auto_update:
-                for device in self.device_list:
-                    device.update_battery_percentage()
-            time.sleep(30)
+        for device in self.device_list:
+            device.update_battery_percentage()
 
     def cycle(self):
         while True:
@@ -85,7 +83,7 @@ class Devices:
                 for device in self.device_list:
                     device.update_charge_status()
                 self.update_connection()
-            time.sleep(3 * 60)
+            time.sleep(BATTERY_CHECK_INTERVAL)
 
     def update(self):
         cycles = Thread(name='cycle', target=self.cycle)
