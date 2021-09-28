@@ -27,10 +27,10 @@ def status():
     log.info(f'active number of threads: {threading.active_count()}')
     requested_udid = request.args.get('device')
     if requested_udid is None:
-        return jsonify(devices.to_dict()), 200
+        return jsonify({'cycle_mode': devices.cycle_mode, 'devices': devices.to_dict()}), 200
     else:
         if devices.contains(requested_udid):
-            return devices.get(requested_udid).to_dict(), 200
+            return jsonify({'cycle_mode': devices.cycle_mode, 'device': devices.get(requested_udid).to_dict()}), 200
     return {'error': f'device with udid {requested_udid} not connected.'}, 404
 
 @app.route('/api/cycle', methods=['POST'])
