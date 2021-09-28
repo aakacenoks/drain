@@ -17,10 +17,6 @@ app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 devices = Devices()
 devices.update()
 
-@app.route("/")
-def index():
-    return render_template('index.html', devices=devices)
-
 @app.route('/api/status', methods=['GET'])
 @cross_origin()
 def status():
