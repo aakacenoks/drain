@@ -1,12 +1,11 @@
+import atexit
 from time import sleep
 
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
+
 from src.devices import Devices
 from src.logger import log
-import threading
-import atexit
-
 from src.utils import get_appium_process_count
 
 app = Flask(__name__)
@@ -20,7 +19,6 @@ devices.update()
 @app.route('/api/status', methods=['GET'])
 @cross_origin()
 def status():
-    log.info(f'active number of threads: {threading.active_count()}')
     requested_udid = request.args.get('device')
     if requested_udid is None:
         return jsonify({'cycle_mode': devices.cycle_mode, 'devices': devices.to_dict()}), 200
