@@ -31,7 +31,7 @@ class Devices:
     def connect(self):
         for hub in self.hubs:
             enable_all_ports(hub)
-        time.sleep(3)
+        time.sleep(0.5)
         self.update_connections()
 
     def to_dict(self):
