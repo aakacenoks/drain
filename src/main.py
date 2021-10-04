@@ -41,27 +41,43 @@ def cycle():
 @app.route('/api/connect', methods=['POST'])
 @cross_origin()
 def connect():
-    try:
-        if request.data:
-            key_value_pair = list(request.json.items())
-            if key_value_pair[0][0] == 'device':
-                udid = key_value_pair[0][1]
-                devices.connect_device(udid)
+    if request.data:
+        key_value_pair = list(request.json.items())
+        if key_value_pair[0][0] == 'device':
+            udid = key_value_pair[0][1]
+            devices.connect_device(udid)
+            sleep(3)
+            devices.update_connections()
+            message = f'individual device {udid} connected'
+            log.info(message)
+            return {'message': message}, 200
+        return {'error': 'wrong payload. try: {device: udid}'}, 405
+    devices.cycle_mode = False
+    devices.connect()
+    devices.update_battery_percentages()
+    message_success = 'cycle mode disabled. all ports connected. ready for testing.'
+    log.info(message_success)
+    return {'message': message_success}, 200
+
+@app.route('/api/disconnect', methods=['POST'])
+@cross_origin()
+def disconnect():
+    if request.data:
+        key_value_pair = list(request.json.items())
+        if key_value_pair[0][0] == 'device':
+            udid = key_value_pair[0][1]
+            if devices.contains(udid):
+                devices.disconnect_device(udid)
                 sleep(3)
                 devices.update_connections()
-                log.info(f'individual device {udid} connected')
-                return {'message': f'individual device {key_value_pair[0][1]} connected'}, 200
-            return {'error': 'wrong payload. try: {device: udid}'}, 405
-        devices.cycle_mode = False
-        devices.connect()
-        devices.update_battery_percentages()
-        log.info('cycle mode disabled. all ports connected. ready for testing.')
-        return {'message': 'cycle mode disabled. all ports connected. ready for testing.'}, 200
-    except:
-        message = f'could not connect all ports. check hub connection'
-        log.info(message)
-        return {'message': message}, 500
-
+                message = f'individual device {udid} disconnected'
+                log.info(message)
+                return {'message': message}, 200
+            return {'error': f'unknown device udid ({udid})'}, 405
+        return {'error': 'wrong payload. try: {device: udid}'}, 405
+    error_no_device = 'could not disconnect - no device given in payload'
+    log.info(error_no_device)
+    return {'error': error_no_device}, 405
 
 if __name__ == '__main__':
     atexit.register(connect)
