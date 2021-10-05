@@ -3,7 +3,7 @@ import time
 from src.android_device import AndroidDevice
 from src.logger import log
 from src.ios_device import IOSDevice
-from src.utils import read_config_file, get_connected_ios_devices, get_connected_android_devices
+from src.utils import get_data_from_yaml, get_connected_ios_devices, get_connected_android_devices
 from threading import Thread
 from src.hub_manager import enable_all_ports, disable_all_ports
 from src.constants import BATTERY_CHECK_INTERVAL
@@ -17,7 +17,7 @@ class Devices:
         self.hubs = set([device.hub_serial for device in self.device_list])
 
     def populate_device_list(self):
-        device_list = read_config_file()
+        device_list = get_data_from_yaml('config.yaml')
         for device_params in device_list['devices']:
             if device_params['os'].lower() == "android":
                 self.device_list.append(AndroidDevice(device_params))

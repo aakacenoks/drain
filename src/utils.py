@@ -36,9 +36,9 @@ def get_appium_process_count():
     except subprocess.CalledProcessError:
         return 0
 
-def read_config_file():
-    with open("config.yaml", 'r') as stream:
+def get_data_from_yaml(path):
+    with open(path, 'r') as stream:
         try:
             return yaml.safe_load(stream)
         except yaml.YAMLError as exc:
-            raise Exception(f'could not read config file: {exc}')
+            raise Exception(f'could not read file: {exc}')
