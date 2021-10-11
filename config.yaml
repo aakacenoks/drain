@@ -42,8 +42,8 @@ devices:
   - name: Huawei P20 Lite
     os: Android
     udid: 9WV4C18813010171
-    hub_serial: 268992103
-    hub_port: 1
+    hub-serial: 268992103
+    hub-port: 1
   - name: Samsung Galaxy A8 2018
     os: Android
     udid: 52005c37523f8543
