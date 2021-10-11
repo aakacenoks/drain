@@ -46,7 +46,7 @@ def connect():
         if key_value_pair[0][0] == 'device':
             udid = key_value_pair[0][1]
             devices.connect_device(udid)
-            sleep(3)
+            sleep(2)
             devices.update_connections()
             message = f'individual device {udid} connected'
             log.info(message)
@@ -68,7 +68,7 @@ def disconnect():
             udid = key_value_pair[0][1]
             if devices.contains(udid):
                 devices.disconnect_device(udid)
-                sleep(3)
+                sleep(1)
                 devices.update_connections()
                 message = f'individual device {udid} disconnected'
                 log.info(message)
