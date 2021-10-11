@@ -17,7 +17,7 @@ class Devices:
         self.hubs = set([device.hub_serial for device in self.device_list])
 
     def populate_device_list(self):
-        device_list = get_data_from_yaml('config.yaml')
+        device_list = get_data_from_yaml('devices.yaml')
         for device_params in device_list['devices']:
             if device_params['os'].lower() == "android":
                 self.device_list.append(AndroidDevice(device_params))

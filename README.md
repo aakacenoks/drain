@@ -16,7 +16,7 @@ Local address: `0.0.0.0:5004`
 `POST /api/cycle/` - Put devices in charging cycle mode (charge to 80%, drain to 30%)
 
 ## Add devices
-List of test devices is defined in file `config/devices.yaml`
+List of test devices is defined in file `devices.yaml`
 
 Example:
 ```
