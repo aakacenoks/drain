@@ -6,7 +6,7 @@ from src.ios_device import IOSDevice
 from src.utils import get_data_from_yaml, get_connected_ios_devices, get_connected_android_devices
 from threading import Thread
 from src.hub_manager import enable_all_ports, disable_all_ports
-from src.constants import BATTERY_CHECK_INTERVAL
+from src.constants import BATTERY_CHECK_INTERVAL, CONNECTION_WAITING_TIME
 
 
 class Devices:
@@ -33,7 +33,7 @@ class Devices:
     def connect(self):
         for hub in self.hubs:
             enable_all_ports(hub)
-        time.sleep(3)
+        time.sleep(CONNECTION_WAITING_TIME)
         self.update_connections()
 
     def to_dict(self):

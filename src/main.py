@@ -4,6 +4,7 @@ from time import sleep
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 
+from src.constants import CONNECTION_WAITING_TIME, DISCONNECTION_WAITING_TIME
 from src.devices import Devices
 from src.logger import log
 from src.utils import get_appium_process_count
@@ -46,7 +47,7 @@ def connect():
         if key_value_pair[0][0] == 'device':
             udid = key_value_pair[0][1]
             devices.connect_device(udid)
-            sleep(1.5)
+            sleep(CONNECTION_WAITING_TIME)
             devices.update_connections()
             message = f'individual device {udid} connected'
             log.info(message)
@@ -68,7 +69,7 @@ def disconnect():
             udid = key_value_pair[0][1]
             if devices.contains(udid):
                 devices.disconnect_device(udid)
-                sleep(0.5)
+                sleep(DISCONNECTION_WAITING_TIME)
                 devices.update_connections()
                 message = f'individual device {udid} disconnected'
                 log.info(message)
