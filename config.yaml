@@ -39,9 +39,9 @@ devices:
     udid: 00008030-001908D101D0802E
     hub-serial: 268992103
     hub-port: 6
-  - name: Huawei P30 Pro
+  - name: Huawei P20 Lite
     os: Android
-    udid: EHT0220602002159
+    udid: 9WV4C18813010171
     hub-serial: 268992103
     hub-port: 1
   - name: Samsung Galaxy A8 2018
