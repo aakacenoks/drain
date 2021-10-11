@@ -14,3 +14,4 @@ class IOSDevice(Device):
             self.battery_percentage = int(charge)
         except subprocess.CalledProcessError:
             log.warning(f"Could not update battery status for {self.name} ({self.udid}). Check connection.")
+            self.connected = None

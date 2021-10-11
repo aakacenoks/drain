@@ -61,9 +61,21 @@ class Devices:
         ios_devices = get_connected_ios_devices()
         for device in self.device_list:
             if type(device) is AndroidDevice:
-                device.connected = device.udid in android_devices
+                self.update_android_connections(device, android_devices)
             else:
-                device.connected = device.udid in ios_devices
+                self.update_ios_connections(device, ios_devices)
+
+    def update_android_connections(self, device, devices):
+        if device.udid in devices:
+            device.connected = True
+        elif device.udid not in devices and device.connected is not None:
+            device.connected = False
+
+    def update_ios_connections(self, device, devices):
+        if device.udid in devices:
+            device.connected = True
+        elif device.udid not in devices and device.connected is not None:
+            device.connected = False
 
     def update_battery_percentages(self):
         for device in self.device_list:
