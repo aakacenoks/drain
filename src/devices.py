@@ -87,7 +87,7 @@ class Devices:
                 self.update_connections()
             time.sleep(BATTERY_CHECK_INTERVAL)
 
-    def update(self):
+    def start_battery_monitor(self):
         cycles = Thread(name='cycle', target=self.cycle)
         cycles.setDaemon(True)
         cycles.start()

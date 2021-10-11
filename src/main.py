@@ -15,7 +15,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
 devices = Devices()
-devices.update()
+devices.start_battery_monitor()
 
 @app.route('/api/status', methods=['GET'])
 @cross_origin()
@@ -35,7 +35,7 @@ def cycle():
     if processes < 1:
         devices.cycle_mode = True
         return {'message': 'cycle mode enabled'}, 200
-    message = f'cycle mode requested but not enabled. there are {processes} appium processes running'
+    message = f'cycle mode requested but not enabled. reason: there are {processes} appium processes running'
     log.info(message)
     return {'message': message}, 405
 
