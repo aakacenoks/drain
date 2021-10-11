@@ -61,17 +61,11 @@ class Devices:
         ios_devices = get_connected_ios_devices()
         for device in self.device_list:
             if type(device) is AndroidDevice:
-                self.update_android_connections(device, android_devices)
+                self.update_connection_status(device, android_devices)
             else:
-                self.update_ios_connections(device, ios_devices)
+                self.update_connection_status(device, ios_devices)
 
-    def update_android_connections(self, device, devices):
-        if device.udid in devices:
-            device.connected = True
-        elif device.udid not in devices and device.connected is not None:
-            device.connected = False
-
-    def update_ios_connections(self, device, devices):
+    def update_connection_status(self, device, devices):
         if device.udid in devices:
             device.connected = True
         elif device.udid not in devices and device.connected is not None:
