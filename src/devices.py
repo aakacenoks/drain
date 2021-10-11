@@ -70,6 +70,8 @@ class Devices:
             device.connected = True
         elif device.udid not in devices and device.connected is not None:
             device.connected = False
+        else:
+            device.connected = None  # connection error
 
     def update_battery_percentages(self):
         for device in self.device_list:
