@@ -21,8 +21,10 @@ class Devices:
         for device_params in device_list['devices']:
             if device_params['os'].lower() == "android":
                 self.device_list.append(AndroidDevice(device_params))
-            else:
+            elif device_params['os'].lower() == "ios":
                 self.device_list.append(IOSDevice(device_params))
+            else:
+                raise Exception(f'invalid platform: "{device_params["os"]}"')
 
     def disconnect(self):
         for hub in self.hubs:
@@ -41,16 +43,10 @@ class Devices:
         return json.dumps(self.to_dict(), indent=2, sort_keys=True)
 
     def contains(self, udid):
-        for device in self.device_list:
-            if device.udid == udid:
-                return True
-        return False
+        return any(device.udid == udid for device in self.device_list)
 
     def get(self, udid):
-        for device in self.device_list:
-            if device.udid == udid:
-                return device
-        return None
+        return next((device for device in self.device_list if device.udid == udid), None)
 
     def connect_device(self, udid):
         device = self.get(udid)
