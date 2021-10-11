@@ -9,7 +9,9 @@ Local address: `0.0.0.0:5004`
 
 `GET /api/status/` - Get current device status
 
-`POST /api/connect/` - Connect all devices
+`POST /api/connect/` - Connect all devices. Or connect individual device by passing it's udid in payload `{"device": "xxx"}`
+
+`POST /api/disconnect/` - Disconnect individual device by passing it's udid in payload `{"device": "xxx"}`
 
 `POST /api/cycle/` - Put devices in charging cycle mode (charge to 80%, drain to 30%)
 
@@ -37,10 +39,15 @@ pip install -r requirements.txt
 
 ## Run server
 ```
+./start.sh
+```
+
+Or run full command:
+```
 export FLASK_APP=src/main.py; export FLASK_ENV=production; flask run --host=0.0.0.0 --port=5004
 ```
 
 ## Run tests
 ```
-pytest test/tests.py
+pytest tests/tests.py
 ```

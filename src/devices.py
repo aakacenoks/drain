@@ -1,29 +1,28 @@
 import json
 import time
-from android_device import AndroidDevice
-from logger import log
-from ios_device import IOSDevice
-from utils import read_devices, get_connected_ios_devices, get_connected_android_devices
+from src.android_device import AndroidDevice
+from src.logger import log
+from src.ios_device import IOSDevice
+from src.utils import get_data_from_yaml, get_connected_ios_devices, get_connected_android_devices
 from threading import Thread
-from hub_manager import enable_all_ports, disable_all_ports
+from src.hub_manager import enable_all_ports, disable_all_ports
+from src.constants import BATTERY_CHECK_INTERVAL
 
 
 class Devices:
     def __init__(self):
-        self.device_list = self.generate_devices()
-        self.auto_update = True
+        self.device_list = []
+        self.populate_device_list()
         self.cycle_mode = True
         self.hubs = set([device.hub_serial for device in self.device_list])
 
-    def generate_devices(self):
-        generated_devices = []
-        device_list = read_devices()
+    def populate_device_list(self):
+        device_list = get_data_from_yaml('config.yaml')
         for device_params in device_list['devices']:
             if device_params['os'].lower() == "android":
-                generated_devices.append(AndroidDevice(device_params))
+                self.device_list.append(AndroidDevice(device_params))
             else:
-                generated_devices.append(IOSDevice(device_params))
-        return generated_devices
+                self.device_list.append(IOSDevice(device_params))
 
     def disconnect(self):
         for hub in self.hubs:
@@ -33,6 +32,7 @@ class Devices:
         for hub in self.hubs:
             enable_all_ports(hub)
         time.sleep(3)
+        self.update_connections()
 
     def to_dict(self):
         return [device.to_dict() for device in self.device_list]
@@ -60,7 +60,7 @@ class Devices:
         device = self.get(udid)
         device.disconnect()
 
-    def update_connection(self):
+    def update_connections(self):
         android_devices = get_connected_android_devices()
         ios_devices = get_connected_ios_devices()
         for device in self.device_list:
@@ -70,22 +70,18 @@ class Devices:
                 device.connected = device.udid in ios_devices
 
     def update_battery_percentages(self):
-        while True:
-            if self.auto_update:
-                for device in self.device_list:
-                    device.update_battery_percentage()
-            time.sleep(30)
+        for device in self.device_list:
+            device.update_battery_percentage()
 
     def cycle(self):
         while True:
             if self.cycle_mode:
                 self.connect()
-                self.update_connection()
-                log.info("")
+                log.info("cycle update")
                 for device in self.device_list:
                     device.update_charge_status()
-                self.update_connection()
-            time.sleep(3 * 60)
+                self.update_connections()
+            time.sleep(BATTERY_CHECK_INTERVAL)
 
     def update(self):
         cycles = Thread(name='cycle', target=self.cycle)

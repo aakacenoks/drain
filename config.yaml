@@ -2,43 +2,43 @@ devices:
   - name: Moto e6 play
     os: Android
     udid: ZE2228GP2G
-    hub_serial: 1736182291
-    hub_port: 3
+    hub-serial: 1736182291
+    hub-port: 3
   - name: OnePlus 6
     os: Android
     udid: 139acc99
-    hub_serial: 1736182291
-    hub_port: 4
+    hub-serial: 1736182291
+    hub-port: 4
   - name: Galaxy XCover
     os: Android
     udid: R58R12DB3TL
-    hub_serial: 1736182291
-    hub_port: 6
-  - name: CAT_S52
+    hub-serial: 1736182291
+    hub-port: 6
+  - name: CAT S52
     os: Android
     udid: S521946012935
-    hub_serial: 1736182291
-    hub_port: 1
+    hub-serial: 1736182291
+    hub-port: 1
   - name: Huawei Mate 10 Lite
     os: Android
     udid: FFY5T18721015939
-    hub_serial: 1736182291
-    hub_port: 2
+    hub-serial: 1736182291
+    hub-port: 2
   - name: Xiaomi Redmi Go
     os: Android
     udid: a9c4aa9f7d95
-    hub_serial: 1736182291
-    hub_port: 0
+    hub-serial: 1736182291
+    hub-port: 0
   - name: iPhone SE
     os: iOS
     udid: 55b9951eb98d2cbf12e097b19d97466d9f4fe1a1
-    hub_serial: 268992103
-    hub_port: 0
+    hub-serial: 268992103
+    hub-port: 0
   - name: iPhone 11
     os: iOS
     udid: 00008030-001908D101D0802E
-    hub_serial: 268992103
-    hub_port: 2
+    hub-serial: 268992103
+    hub-port: 6
   - name: Huawei P20 Lite
     os: Android
     udid: 9WV4C18813010171
@@ -47,10 +47,15 @@ devices:
   - name: Samsung Galaxy A8 2018
     os: Android
     udid: 52005c37523f8543
-    hub_serial: 268992103
-    hub_port: 3
+    hub-serial: 268992103
+    hub-port: 3
   - name: Samsung A51
     os: Android
     udid: R58NC2KSV8E
-    hub_serial: 268992103
-    hub_port: 5
+    hub-serial: 268992103
+    hub-port: 5
+  - name: iPhone X
+    os: iOS
+    udid: 4227971ef70809f0eb0cf2bb2baf35fdc6853c7e
+    hub-serial: 268992103
+    hub-port: 2
