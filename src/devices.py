@@ -6,7 +6,7 @@ from src.ios_device import IOSDevice
 from src.utils import get_data_from_yaml, get_connected_ios_devices, get_connected_android_devices
 from threading import Thread
 from src.hub_manager import enable_all_ports, disable_all_ports
-from src.constants import BATTERY_CHECK_INTERVAL, CONNECTION_WAITING_TIME
+from src.constants import BATTERY_CHECK_INTERVAL, CONNECTION_WAITING_TIME, DISCONNECTION_WAITING_TIME
 
 
 class Devices:
@@ -23,12 +23,12 @@ class Devices:
                 self.device_list.append(AndroidDevice(device_params))
             elif device_params['os'].lower() == "ios":
                 self.device_list.append(IOSDevice(device_params))
-            else:
-                raise Exception(f'invalid platform: "{device_params["os"]}"')
 
     def disconnect(self):
         for hub in self.hubs:
             disable_all_ports(hub)
+        time.sleep(DISCONNECTION_WAITING_TIME)
+        self.update_connections()
 
     def connect(self):
         for hub in self.hubs:
