@@ -59,7 +59,6 @@ class Devices:
     def update_connections(self):
         android_devices = get_connected_android_devices()
         ios_devices = get_connected_ios_devices()
-        log.info(f'connected android devices: {android_devices}')
         for device in self.device_list:
             if type(device) is AndroidDevice:
                 self.update_connection_status(device, android_devices)
