@@ -71,7 +71,7 @@ class Devices:
         elif device.udid not in devices and device.connected is not None:
             device.connected = False
         else:
-            device.connected = None  # connection error
+            device.connected = None  # error - port is on, but device not in list of connected devices
 
     def update_battery_percentages(self):
         for device in self.device_list:
