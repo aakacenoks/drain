@@ -49,6 +49,7 @@ def connect():
             devices.connect_device(udid)
             sleep(CONNECTION_WAITING_TIME)
             devices.update_connections()
+            devices.update_battery_percentages()
             message = f'individual device {udid} connected'
             log.info(message)
             return {'message': message}, 200
