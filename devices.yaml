@@ -4,9 +4,9 @@ devices:
     udid: ZE2228GP2G
     hub-serial: 1736182291
     hub-port: 3
-  - name: OnePlus 6
+  - name: Oppo A5s
     os: Android
-    udid: 139acc99
+    udid: QWA6L7LFAUNFOBSK
     hub-serial: 1736182291
     hub-port: 4
   - name: Galaxy XCover
