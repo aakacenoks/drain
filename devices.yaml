@@ -29,9 +29,9 @@ devices:
     udid: a9c4aa9f7d95
     hub-serial: 1736182291
     hub-port: 0
-  - name: iPhone 11
+  - name: iPhone 11 Pro
     os: iOS
-    udid: 00008030-001908D101D0802E
+    udid: 00008030-00166CD826F0802E
     hub-serial: 268992103
     hub-port: 6
   - name: Huawei P20 Lite
