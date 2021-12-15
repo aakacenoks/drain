@@ -45,13 +45,12 @@ def cycle():
 @cross_origin()
 def connect(udid):
     if udid:
-        device = devices.get(udid)
-        if device:
-            device.connect()
+        if devices.contains(udid):
+            devices.get(udid).connect()
             sleep(CONNECTION_WAITING_TIME)
             devices.update_connections()
-            device.update_battery_percentage()
-            message = f'individual device {device.udid} connected'
+            devices.get(udid).update_battery_percentage()
+            message = f'individual device {udid} connected'
             log.info(message)
             return {'message': message}, 200
         return {'error': f'unknown device ({udid})'}, 404
