@@ -45,12 +45,12 @@ def connect():
     if request.data:
         key_value_pair = list(request.json.items())
         if key_value_pair[0][0] == 'device':
-            udid = key_value_pair[0][1]
-            devices.connect_device(udid)
+            device = devices.get(key_value_pair[0][1])
+            device.connect()
             sleep(CONNECTION_WAITING_TIME)
             devices.update_connections()
-            devices.update_battery_percentages()
-            message = f'individual device {udid} connected'
+            device.update_battery_percentage()
+            message = f'individual device {device.udid} connected'
             log.info(message)
             return {'message': message}, 200
         return {'error': 'wrong payload. try: {device: udid}'}, 405
@@ -69,7 +69,7 @@ def disconnect():
         if key_value_pair[0][0] == 'device':
             udid = key_value_pair[0][1]
             if devices.contains(udid):
-                devices.disconnect_device(udid)
+                devices.get(udid).disconnect()
                 sleep(DISCONNECTION_WAITING_TIME)
                 devices.update_connections()
                 message = f'individual device {udid} disconnected'

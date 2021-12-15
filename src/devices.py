@@ -48,14 +48,6 @@ class Devices:
     def get(self, udid):
         return next((device for device in self.device_list if device.udid == udid), None)
 
-    def connect_device(self, udid):
-        device = self.get(udid)
-        device.connect()
-
-    def disconnect_device(self, udid):
-        device = self.get(udid)
-        device.disconnect()
-
     def update_connections(self):
         android_devices = get_connected_android_devices()
         ios_devices = get_connected_ios_devices()
