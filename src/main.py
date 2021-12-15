@@ -6,8 +6,9 @@ from flask_cors import CORS, cross_origin
 
 from src.constants import CONNECTION_WAITING_TIME, DISCONNECTION_WAITING_TIME
 from src.devices import Devices
+from src.hub_manager import enable_all_ports, disable_port
 from src.logger import log
-from src.utils import get_appium_process_count
+from src.utils import get_appium_process_count, get_all_connected_devices
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -80,6 +81,33 @@ def disconnect():
     error_no_device = 'could not disconnect - no device given in payload'
     log.info(error_no_device)
     return {'error': error_no_device}, 405
+
+@app.route('/api/search/<string:udid>', methods=['GET'])
+@cross_origin()
+def search(udid):
+    if devices.cycle_mode:
+        log.info(f'searching for device with udid ({udid})...')
+        for hub in devices.hubs:
+            enable_all_ports(hub)
+        sleep(CONNECTION_WAITING_TIME)
+        connected_devices = get_all_connected_devices()
+        if udid in connected_devices:
+            for hub in devices.hubs:
+                for port in range(0, 8):
+                    disable_port(hub, port)
+                    sleep(DISCONNECTION_WAITING_TIME)
+                    updated_list = get_all_connected_devices()
+                    missing_device = next([device for device in connected_devices if device not in updated_list], None)
+                    if missing_device is udid:
+                        device_info = {'udid': udid, 'hub': hub, 'port': port}
+                        log.info(f"device found. info: {device_info}")
+                        return device_info, 200
+                    else:
+                        log.info(f'searched device did not disconnect. device {missing_device} disconnected instead')
+            return {'message': f'device ({udid}) is connected, but could not be disconnected'}, 404
+        else:
+            return {'message': f'device ({udid}) is not connected to any of the hubs ({devices.hubs})'}, 404
+    return {'message': "search is only allowed during cycle mode"}, 405
 
 if __name__ == '__main__':
     atexit.register(connect)

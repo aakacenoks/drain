@@ -31,6 +31,9 @@ def get_connected_ios_devices():
     except subprocess.CalledProcessError:
         log.info('no iOS devices attached')
 
+def get_all_connected_devices():
+    return get_connected_android_devices() + get_connected_ios_devices()
+
 def get_appium_process_count():
     try:
         output = shell('ps -ax | grep appium | grep -v grep')
