@@ -18,16 +18,16 @@ app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 devices = Devices()
 devices.start_battery_monitor()
 
-@app.route('/api/status', methods=['GET'])
+@app.route('/api/status', defaults={'udid': None}, methods=['GET'])
+@app.route('/api/status/<string:udid>', methods=['GET'])
 @cross_origin()
-def status():
-    requested_udid = request.args.get('device')
-    if requested_udid is None:
+def status(udid):
+    if not udid:
         return jsonify({'cycle_mode': devices.cycle_mode, 'devices': devices.to_dict()}), 200
     else:
-        if devices.contains(requested_udid):
-            return jsonify({'cycle_mode': devices.cycle_mode, 'device': devices.get(requested_udid).to_dict()}), 200
-    return {'error': f'device with udid {requested_udid} not connected.'}, 404
+        if devices.contains(udid):
+            return jsonify({'cycle_mode': devices.cycle_mode, 'device': devices.get(udid).to_dict()}), 200
+    return {'error': f'device with udid {udid} in unknown.'}, 404
 
 @app.route('/api/cycle', methods=['POST'])
 @cross_origin()
@@ -40,13 +40,13 @@ def cycle():
     log.info(message)
     return {'message': message}, 405
 
-@app.route('/api/connect', methods=['POST'])
+@app.route('/api/connect', defaults={'udid': None}, methods=['POST'])
+@app.route('/api/connect/<string:udid>', methods=['POST'])
 @cross_origin()
-def connect():
-    if request.data:
-        key_value_pair = list(request.json.items())
-        if key_value_pair[0][0] == 'device':
-            device = devices.get(key_value_pair[0][1])
+def connect(udid):
+    if udid:
+        device = devices.get(udid)
+        if device:
             device.connect()
             sleep(CONNECTION_WAITING_TIME)
             devices.update_connections()
@@ -54,7 +54,7 @@ def connect():
             message = f'individual device {device.udid} connected'
             log.info(message)
             return {'message': message}, 200
-        return {'error': 'wrong payload. try: {device: udid}'}, 405
+        return {'error': f'unknown device ({udid})'}, 404
     devices.cycle_mode = False
     devices.connect()
     devices.update_battery_percentages()
@@ -62,25 +62,18 @@ def connect():
     log.info(message_success)
     return {'message': message_success}, 200
 
-@app.route('/api/disconnect', methods=['POST'])
+@app.route('/api/disconnect', defaults={'udid': None}, methods=['POST'])
+@app.route('/api/disconnect/<string:udid>', methods=['POST'])
 @cross_origin()
-def disconnect():
-    if request.data:
-        key_value_pair = list(request.json.items())
-        if key_value_pair[0][0] == 'device':
-            udid = key_value_pair[0][1]
-            if devices.contains(udid):
-                devices.get(udid).disconnect()
-                sleep(DISCONNECTION_WAITING_TIME)
-                devices.update_connections()
-                message = f'individual device {udid} disconnected'
-                log.info(message)
-                return {'message': message}, 200
-            return {'error': f'unknown device udid ({udid})'}, 405
-        return {'error': 'wrong payload. try: {device: udid}'}, 405
-    error_no_device = 'could not disconnect - no device given in payload'
-    log.info(error_no_device)
-    return {'error': error_no_device}, 405
+def disconnect(udid):
+    if udid and devices.contains(udid):
+        devices.get(udid).disconnect()
+        sleep(DISCONNECTION_WAITING_TIME)
+        devices.update_connections()
+        message = f'individual device {udid} disconnected'
+        log.info(message)
+        return {'message': message}, 200
+    return {'error': f'unknown device udid ({udid})'}, 404
 
 @app.route('/api/search/<string:udid>', methods=['GET'])
 @cross_origin()
