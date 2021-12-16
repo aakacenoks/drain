@@ -88,13 +88,13 @@ def search(udid):
                     disable_port(hub, port)
                     sleep(DISCONNECTION_WAITING_TIME)
                     updated_list = get_all_connected_devices()
-                    missing_device = next((device for device in connected_devices if device not in updated_list), None)
-                    if missing_device == udid:
+                    missing_devices = [device for device in connected_devices if device not in updated_list]
+                    if udid in missing_devices:
                         device_info = {'udid': udid, 'hub': hub, 'port': port}
                         log.info(f"device found. info: {device_info}")
                         return device_info, 200
                     else:
-                        log.info(f'searched device did not disconnect. device {missing_device} disconnected instead')
+                        log.info(f'searched device did not disconnect. devices {missing_devices} disconnected instead')
             return {'message': f'device ({udid}) is connected, but could not be disconnected'}, 404
         else:
             return {'message': f'device ({udid}) is not connected to any of the hubs ({devices.hubs})'}, 404
