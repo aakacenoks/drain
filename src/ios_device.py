@@ -12,6 +12,6 @@ class IOSDevice(Device):
         try:
             charge = shell(f'ideviceinfo -u {self.udid} -q com.apple.mobile.battery -k BatteryCurrentCapacity')
             self.battery_percentage = int(charge)
-        except subprocess.CalledProcessError:
+        except (subprocess.CalledProcessError, ValueError):
             log.warning(f"Could not update battery status for {self.name} ({self.udid}). Check connection.")
             self.connected = None
