@@ -24,9 +24,8 @@ devices.start_battery_monitor()
 def status(udid):
     if not udid:
         return jsonify({'cycle_mode': devices.cycle_mode, 'devices': devices.to_dict()}), 200
-    else:
-        if devices.contains(udid):
-            return jsonify({'cycle_mode': devices.cycle_mode, 'device': devices.get(udid).to_dict()}), 200
+    if devices.contains(udid):
+        return jsonify({'cycle_mode': devices.cycle_mode, 'device': devices.get(udid).to_dict()}), 200
     return {'error': f'device with udid {udid} in unknown.'}, 404
 
 @app.route('/api/cycle', methods=['POST'])
