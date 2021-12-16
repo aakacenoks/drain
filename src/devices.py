@@ -1,12 +1,13 @@
 import json
 import time
-from src.android_device import AndroidDevice
-from src.logger import log
-from src.ios_device import IOSDevice
-from src.utils import get_data_from_yaml, get_connected_ios_devices, get_connected_android_devices
 from threading import Thread
-from src.hub_manager import enable_all_ports, disable_all_ports
+
+from src.android_device import AndroidDevice
 from src.constants import BATTERY_CHECK_INTERVAL, CONNECTION_WAITING_TIME, DISCONNECTION_WAITING_TIME
+from src.hub_manager import enable_all_ports, disable_all_ports
+from src.ios_device import IOSDevice
+from src.logger import log
+from src.utils import get_data_from_yaml, get_all_connected_devices
 
 
 class Devices:
@@ -49,13 +50,9 @@ class Devices:
         return next((device for device in self.device_list if device.udid == udid), None)
 
     def update_connections(self):
-        android_devices = get_connected_android_devices()
-        ios_devices = get_connected_ios_devices()
+        connected_devices = get_all_connected_devices()
         for device in self.device_list:
-            if type(device) is AndroidDevice:
-                self.update_connection_status(device, android_devices)
-            else:
-                self.update_connection_status(device, ios_devices)
+            self.update_connection_status(device, connected_devices)
 
     def update_connection_status(self, device, devices):
         if device.udid in devices:

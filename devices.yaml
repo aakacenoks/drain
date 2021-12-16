@@ -8,7 +8,7 @@ devices:
     os: Android
     udid: QWA6L7LFAUNFOBSK
     hub-serial: 1736182291
-    hub-port: 4
+    hub-port: 7
   - name: Galaxy XCover
     os: Android
     udid: R58R12DB3TL
