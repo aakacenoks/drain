@@ -94,7 +94,7 @@ def search(udid):
                         log.info(f"device found. info: {device_info}")
                         return device_info, 200
                     else:
-                        log.info(f'searched device did not disconnect. the last disconnected device was {missing_devices[-1]}')
+                        log.info(f'searched device did not disconnect. the last disconnected device was {missing_devices[0]}')
             return {'message': f'device ({udid}) is connected, but could not be disconnected'}, 404
         else:
             return {'message': f'device ({udid}) is not connected to any of the hubs ({devices.hubs})'}, 404
