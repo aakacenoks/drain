@@ -88,7 +88,7 @@ def search(udid):
                     disable_port(hub, port)
                     sleep(DISCONNECTION_WAITING_TIME)
                     updated_list = get_all_connected_devices()
-                    missing_device = next([device for device in connected_devices if device not in updated_list], None)
+                    missing_device = next((device for device in connected_devices if device not in updated_list), None)
                     if missing_device == udid:
                         device_info = {'udid': udid, 'hub': hub, 'port': port}
                         log.info(f"device found. info: {device_info}")
