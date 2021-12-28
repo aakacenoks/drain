@@ -60,7 +60,6 @@ def connect(udid):
     log.info(message_success)
     return {'message': message_success}, 200
 
-@app.route('/api/disconnect', defaults={'udid': None}, methods=['POST'])
 @app.route('/api/disconnect/<string:udid>', methods=['POST'])
 @cross_origin()
 def disconnect(udid):
