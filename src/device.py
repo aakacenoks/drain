@@ -19,18 +19,18 @@ class Device:
         self.update_battery_percentage()
         if self.connected:
             if self.battery_percentage >= MAX_BATTERY and self.charging:
-                log.info(f"{self.name} is charged enough ({self.battery_percentage}/{MAX_BATTERY}). turning off charging.")
+                log.info(f'{self.name} is charged enough ({self.battery_percentage}/{MAX_BATTERY}). turning off charging.')
                 self.charging = False
                 self.disconnect()
             elif self.battery_percentage <= MIN_BATTERY and not self.charging:
-                log.info(f"{self.name} is drained enough ({self.battery_percentage}/{MIN_BATTERY}). turning on charging.")
+                log.info(f'{self.name} is drained enough ({self.battery_percentage}/{MIN_BATTERY}). turning on charging.')
                 self.charging = True
                 self.connect()
             elif (self.battery_percentage < MAX_BATTERY) and self.charging:
-                log.info(f"{self.name} is charging ({self.battery_percentage}/{MAX_BATTERY}). continuing the charge.")
+                log.info(f'{self.name} is charging ({self.battery_percentage}/{MAX_BATTERY}). continuing the charge.')
                 return
             elif self.battery_percentage > MIN_BATTERY and not self.charging:
-                log.info(f"{self.name} is draining ({self.battery_percentage}/{MIN_BATTERY}). continuing the drain.")
+                log.info(f'{self.name} is draining ({self.battery_percentage}/{MIN_BATTERY}). continuing the drain.')
                 self.disconnect()
             else:
                 self.charging = True

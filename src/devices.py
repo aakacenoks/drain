@@ -20,9 +20,9 @@ class Devices:
     def populate_device_list(self):
         device_list = get_data_from_yaml('devices.yaml')
         for device_params in device_list['devices']:
-            if device_params['os'].lower() == "android":
+            if device_params['os'].lower() == 'android':
                 self.device_list.append(AndroidDevice(device_params))
-            elif device_params['os'].lower() == "ios":
+            elif device_params['os'].lower() == 'ios':
                 self.device_list.append(IOSDevice(device_params))
 
     def disconnect(self):
@@ -70,7 +70,7 @@ class Devices:
         while True:
             if self.cycle_mode:
                 self.connect()
-                log.info("cycle update")
+                log.info('cycle update')
                 for device in self.device_list:
                     device.update_charge_status()
                 self.update_connections()
