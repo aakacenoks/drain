@@ -7,13 +7,19 @@ Monitor and control with Acroname USB hubs and Flask REST API. Tested on macOS.
 Local address: `0.0.0.0:5004`
 
 
-`GET /api/status/` - Get current device status
+`GET /api/status/` - Get current status for all hubs and ports
 
-`POST /api/connect/` - Connect all devices. Or connect individual device by passing it's udid in payload `{"device": "xxx"}`
+`GET /api/status/<string:udid>` - Get particular device status
 
-`POST /api/disconnect/` - Disconnect individual device by passing it's udid in payload `{"device": "xxx"}`
+`POST /api/connect/` - Connect all devices
+
+`POST /api/connect/<string:udid>` Connect individual device by UDID`
+
+`POST /api/disconnect/<string:udid>` - Disconnect individual device by UDID`
 
 `POST /api/cycle/` - Put devices in charging cycle mode (charge to 80%, drain to 30%)
+
+`GET /api/search/<string:udid>` - Find and get on which hub and port the given device is connected (Cycle mode only)
 
 ## Add devices
 List of test devices is defined in file `devices.yaml`
