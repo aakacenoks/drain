@@ -93,9 +93,9 @@ def search(udid):
                         log.info(f'device found. info: {device_info}')
                         return device_info, 200
                     log.info(f'searched device did not disconnect. the last disconnected device was {missing_devices[0]}')
-            return {'message': f'device ({udid}) is connected, but could not be disconnected'}, 404
-        return {'message': f'device ({udid}) is not connected to any of the hubs ({devices.hubs})'}, 404
-    return {'message': 'search is only allowed during cycle mode'}, 405
+            return {'error': f'device ({udid}) is connected, but could not be disconnected'}, 404
+        return {'error': f'device ({udid}) is not connected to any of the hubs ({devices.hubs})'}, 404
+    return {'error': 'search is only allowed during cycle mode'}, 405
 
 
 if __name__ == '__main__':
