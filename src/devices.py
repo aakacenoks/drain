@@ -54,6 +54,14 @@ class Devices:
         for device in self.device_list:
             self.update_connection_status(device, connected_devices)
 
+    def connect_device(self, udid):
+        device = self.get(udid)
+        device.connect()
+
+    def disconnect_device(self, udid):
+        device = self.get(udid)
+        device.disconnect()
+
     def update_connection_status(self, device, devices):
         if device.udid in devices:
             device.connected = True

@@ -1,7 +1,7 @@
 import atexit
 from time import sleep
 
-from flask import Flask, jsonify
+from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 
 from src.constants import CONNECTION_WAITING_TIME, DISCONNECTION_WAITING_TIME
@@ -96,6 +96,7 @@ def search(udid):
             return {'message': f'device ({udid}) is connected, but could not be disconnected'}, 404
         return {'message': f'device ({udid}) is not connected to any of the hubs ({devices.hubs})'}, 404
     return {'message': 'search is only allowed during cycle mode'}, 405
+
 
 if __name__ == '__main__':
     atexit.register(connect)

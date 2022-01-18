@@ -1,61 +1,11 @@
 devices:
-  - name: Moto e6 play
+  - name: Pixel 3XL
     os: Android
-    udid: ZE2228GP2G
-    hub-serial: 1736182291
-    hub-port: 3
-  - name: Oppo A5s
-    os: Android
-    udid: QWA6L7LFAUNFOBSK
-    hub-serial: 1736182291
-    hub-port: 7
-  - name: Galaxy XCover
-    os: Android
-    udid: R58R12DB3TL
-    hub-serial: 1736182291
-    hub-port: 6
-  - name: CAT S52
-    os: Android
-    udid: S521946012935
-    hub-serial: 1736182291
+    udid: xxx
+    hub-serial: 70000000
     hub-port: 1
-  - name: Huawei Mate 10 Lite
-    os: Android
-    udid: FFY5T18721015939
-    hub-serial: 1736182291
+  - name: iPhone XS Max
+    os: iOS
+    udid: xxx
+    hub-serial: 40000000
     hub-port: 2
-  - name: Xiaomi Redmi Go
-    os: Android
-    udid: a9c4aa9f7d95
-    hub-serial: 1736182291
-    hub-port: 0
-  - name: iPhone 11 Pro
-    os: iOS
-    udid: 00008030-00166CD826F0802E
-    hub-serial: 268992103
-    hub-port: 6
-  - name: Huawei P20 Lite
-    os: Android
-    udid: 9WV4C18813010171
-    hub-serial: 268992103
-    hub-port: 1
-  - name: Samsung Galaxy A8 2018
-    os: Android
-    udid: 52005c37523f8543
-    hub-serial: 268992103
-    hub-port: 3
-  - name: Samsung A51
-    os: Android
-    udid: R58NC2KSV8E
-    hub-serial: 268992103
-    hub-port: 5
-  - name: iPhone X
-    os: iOS
-    udid: 4227971ef70809f0eb0cf2bb2baf35fdc6853c7e
-    hub-serial: 268992103
-    hub-port: 2 
-  - name: iPhone 12 Mini
-    os: iOS
-    udid: 00008101-000C698214C1001E
-    hub-serial: 268992103
-    hub-port: 0

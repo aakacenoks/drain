@@ -3,7 +3,6 @@ import yaml
 
 from src.logger import log
 
-
 def shell(command):
     byte_output = subprocess.check_output(command, shell=True, timeout=10)
     return byte_output.decode('UTF-8').rstrip()
